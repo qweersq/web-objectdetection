@@ -4,6 +4,7 @@ import { BellIcon, SearchIcon } from "@chakra-ui/icons";
 import {
   Button,
   Flex,
+  Grid,
   IconButton,
   Input,
   InputGroup,
@@ -28,9 +29,11 @@ import PropTypes from "prop-types";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import routes from "routes.js";
+import { useColorMode, Switch } from "@chakra-ui/react";
 
 export default function HeaderLinks(props) {
   const { variant, children, fixed, secondary, onOpen, ...rest } = props;
+  const { colorMode, toggleColorMode } = useColorMode();
 
   // Chakra Color Mode
   let mainTeal = useColorModeValue("teal.300", "teal.300");
@@ -50,8 +53,9 @@ export default function HeaderLinks(props) {
       w={{ sm: "100%", md: "auto" }}
       alignItems="center"
       flexDirection="row"
+      // justifyContent="flex-end"
     >
-      <InputGroup
+      {/* <InputGroup
         cursor="pointer"
         bg={inputBg}
         borderRadius="15px"
@@ -92,8 +96,8 @@ export default function HeaderLinks(props) {
           placeholder="Type here..."
           borderRadius="inherit"
         />
-      </InputGroup>
-      <NavLink to="/auth/signin">
+      </InputGroup> */}
+      {/* <NavLink to="/auth/signin">
         <Button
           ms="0px"
           px="0px"
@@ -117,7 +121,19 @@ export default function HeaderLinks(props) {
         >
           <Text display={{ sm: "none", md: "flex" }}>Sign In</Text>
         </Button>
-      </NavLink>
+      </NavLink> */}
+      
+      <Flex
+        justifyContent="space-between"
+        alignItems="center"
+        flexDirection="row"
+        me="16px"
+      >
+        <Switch onChange={toggleColorMode}>
+          {/* Toggle {colorMode === "light" ? "Dark" : "Light"} */}
+        </Switch>
+        {/* <Text>Dark Mode</Text> */}
+      </Flex>
       <SidebarResponsive
         logoText={props.logoText}
         secondary={props.secondary}
@@ -125,7 +141,10 @@ export default function HeaderLinks(props) {
         // logo={logo}
         {...rest}
       />
-      <SettingsIcon
+      <Button bg="#D8503F" _hover={{ bg: "#eb7668" }} size="md" color={"white"} ml="16px">
+        Logout
+      </Button>
+      {/* <SettingsIcon
         cursor="pointer"
         ms={{ base: "16px", xl: "0px" }}
         me="16px"
@@ -134,8 +153,8 @@ export default function HeaderLinks(props) {
         color={navbarIcon}
         w="18px"
         h="18px"
-      />
-      <Menu>
+      /> */}
+      {/* <Menu>
         <MenuButton>
           <BellIcon color={navbarIcon} w="18px" h="18px" />
         </MenuButton>
@@ -170,7 +189,7 @@ export default function HeaderLinks(props) {
             </MenuItem>
           </Flex>
         </MenuList>
-      </Menu>
+      </Menu> */}
     </Flex>
   );
 }

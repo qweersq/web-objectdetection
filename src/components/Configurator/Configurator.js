@@ -24,7 +24,6 @@ import { FaTwitter, FaFacebook } from "react-icons/fa";
 export default function Configurator(props) {
   const { secondary, isOpen, onClose, fixed, ...rest } = props;
   const [switched, setSwitched] = useState(props.isChecked);
-
   const { colorMode, toggleColorMode } = useColorMode();
   // Chakra Color Mode
   let fixedDisplay = "flex";
@@ -63,7 +62,7 @@ export default function Configurator(props) {
           </DrawerHeader>
           <DrawerBody w="340px" ps="24px" pe="40px">
             <Flex flexDirection="column">
-              <Box>
+              {/* <Box>
                 <Text fontSize="md" fontWeight="600">
                   Sidenav Type
                 </Text>
@@ -120,7 +119,7 @@ export default function Configurator(props) {
                     }
                   }}
                 />
-              </Box>
+              </Box> */}
               <Flex
                 justifyContent="space-between"
                 alignItems="center"
@@ -129,13 +128,13 @@ export default function Configurator(props) {
                 <Text fontSize="md" fontWeight="600" mb="4px">
                   Dark/Light
                 </Text>
-                <Button onClick={toggleColorMode}>
+                <Switch onChange={toggleColorMode}>
                   Toggle {colorMode === "light" ? "Dark" : "Light"}
-                </Button>
+                </Switch>
               </Flex>
 
               <Separator />
-              <Box mt="24px">
+              {/* <Box mt="24px">
                 <Text fontSize="md" fontWeight="600">
                   Sidenav Type
                 </Text>
@@ -221,7 +220,7 @@ export default function Configurator(props) {
                     </Link>
                   </Flex>
                 </Box>
-              </Box>
+              </Box> */}
             </Flex>
           </DrawerBody>
         </DrawerContent>
