@@ -141,7 +141,7 @@ export default function HeaderLinks(props) {
         // logo={logo}
         {...rest}
       />
-      <Button bg="#D8503F" _hover={{ bg: "#eb7668" }} size="md" color={"white"} ml="16px">
+      <Button bg="#D8503F" _hover={{ bg: "#eb7668" }} size="sm" color={"white"} ml="16px" borderRadius="lg">
         Logout
       </Button>
       {/* <SettingsIcon
