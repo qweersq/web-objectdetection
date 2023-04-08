@@ -34,6 +34,7 @@ import { TimePicker } from 'antd';
 import 'antd/dist/reset.css';
 import { useState } from "react";
 import Bell from "assets/img/Bell.png";
+import Card from "components/Card/Card";
 
 
 
@@ -41,6 +42,8 @@ export default function Dashboard() {
   const iconBoxInside = useColorModeValue("white", "white");
   const pickerStyle = { border: '1px solid #000', borderRadius: '4px', height: '29px', width: '200px', margin: '15px' };
   const [isOn, setIsOn] = useState(true);
+  const textColor = useColorModeValue("gray.700", "white");
+
 
 
   const toggleButton = () => {
@@ -52,33 +55,35 @@ export default function Dashboard() {
 
   return (
     <Grid templateColumns="repeat(2, 1fr)" gap={2} pt={{ base: "120px", md: "75px" }}>
-      <Box bg="#fff" p={4} color="black" borderRadius="lg" boxShadow="md" width="100%">
-        <Flex justifyContent="space-between" alignItems="center">
-          <Text> Alarm Sensor</Text>
-          <TimePicker.RangePicker format="HH:mm" style={pickerStyle} className="custom-time-picker" />
-          <Button
-            bg={buttonBg}
-            _hover={{ bg: isOn ? '#42ffaf' : '#FF7875' }}
-            color="white"
-            borderRadius="lg"
-            onClick={toggleButton}
-            width="77px"
-            height="29px"
-          >
-            {isOn ? 'On' : 'Off'}
-          </Button>
-        </Flex>
-      </Box>
-      <Box bg="#fff" p={4} color="black" borderRadius="lg" boxShadow="md" width="100%" >
+      <Card p={4} color="black" borderRadius="lg" boxShadow="md" width="100%">
+        
+          <Flex justifyContent="space-between" alignItems="center">
+            <Text fontSize="xl" fontWeight="bold" color={textColor}> Alarm Sensor</Text>
+            <TimePicker.RangePicker format="HH:mm" style={pickerStyle} className="custom-time-picker"/>
+            <Button
+              bg={buttonBg}
+              _hover={{ bg: isOn ? '#42ffaf' : '#FF7875' }}
+              color="white"
+              borderRadius="lg"
+              onClick={toggleButton}
+              width="77px"
+              height="29px"
+            >
+              {isOn ? 'On' : 'Off'}
+            </Button>
+          </Flex>
+        
+      </Card>
+      <Card p={4} color="black" borderRadius="lg" boxShadow="md" width="100%">
         <Flex justifyContent="space-between" alignItems="center" pt="14px">
           <Image src={Bell}></Image>
-          <Text textDecor="bold"> 124 </Text>
-          <Text size="md"> Sensor Point </Text>
-          <Button bg="#00DC7F" color="white" _hover="none" width="77px" height="29px" borderRadius="lg">
+          <Text fontSize="xl" fontWeight="bold" color={textColor}> 124 </Text>
+          <Text fontSize="lg" mr="250px" color={textColor}> Sensor Point </Text>
+          <Button bg="#00DC7F" color="white" _hover="none" width="77px" height="29px" borderRadius="lg" _active="none">
             Active
           </Button>
         </Flex>
-      </Box>
+      </Card>
     </Grid >
   );
 }
