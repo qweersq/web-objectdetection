@@ -19,7 +19,7 @@ export function SidebarLocation() {
     const textColor = useColorModeValue("gray.700", "white");
 
     return (
-        <Card p="1rem" my={{ sm: "24px", xl: "0px" }}>
+        <Card p="1rem" my={{ sm: "24px", xl: "0px" }} boxShadow="md">
             <CardHeader p="12px 5px" mb="12px">
                 <Flex justify="space-between" align="flex-start" flexDirection="column" minHeight="30px" w="100%">
                     <Text fontSize="sm" color={textColor} fontWeight="bold">
