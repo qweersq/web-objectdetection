@@ -35,8 +35,6 @@ export function SidebarLocation() {
                     Button
                 </Button>
             </Flex>
-            <CardBody p="0px 5px">
-            </CardBody>
         </Card>
     );
 }
