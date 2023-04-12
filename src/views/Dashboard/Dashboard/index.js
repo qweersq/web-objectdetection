@@ -57,13 +57,12 @@ export default function Dashboard() {
   return (
     <Grid templateColumns="repeat(2, 1fr)" gap={2} pt={{ base: "120px", md: "75px" }}>
       <Card p={4} color="black" borderRadius="lg" boxShadow="md" width="100%">
-        
           <Flex justifyContent="space-between" alignItems="center">
             <Text fontSize="xl" fontWeight="bold" color={textColor}> Alarm Sensor</Text>
             <Flex justifyContent="space-between" alignItems="center">
             <TimePicker format="HH:mm" style={pickerStyle} className="custom-time-picker"/>
             <Divider
-            width="10px" borderWidth="2px" borderColor="black" borderRadius="3px" pl="3px"
+            width="10px" borderWidth="2px" borderColor={textColor} borderRadius="3px" pl="3px"
             />
             <TimePicker format="HH:mm" style={pickerStyle} className="custom-time-picker"/>
             </Flex>
