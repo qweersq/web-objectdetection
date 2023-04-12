@@ -8,6 +8,7 @@ import {
   Box,
   Text,
   Button,
+  Divider,
 } from "@chakra-ui/react";
 // assets
 import peopleImage from "assets/img/people-image.png";
@@ -40,7 +41,7 @@ import Card from "components/Card/Card";
 
 export default function Dashboard() {
   const iconBoxInside = useColorModeValue("white", "white");
-  const pickerStyle = { border: '1px solid #000', borderRadius: '4px', height: '29px', width: '200px', margin: '15px' };
+  const pickerStyle = { border: '1px solid #000', borderRadius: '4px', height: '29px', width: '100px', margin: '15px' };
   const [isOn, setIsOn] = useState(true);
   const textColor = useColorModeValue("gray.700", "white");
 
@@ -59,7 +60,13 @@ export default function Dashboard() {
         
           <Flex justifyContent="space-between" alignItems="center">
             <Text fontSize="xl" fontWeight="bold" color={textColor}> Alarm Sensor</Text>
-            <TimePicker.RangePicker format="HH:mm" style={pickerStyle} className="custom-time-picker"/>
+            <Flex justifyContent="space-between" alignItems="center">
+            <TimePicker format="HH:mm" style={pickerStyle} className="custom-time-picker"/>
+            <Divider
+            width="10px" borderWidth="2px" borderColor="black" borderRadius="3px" pl="3px"
+            />
+            <TimePicker format="HH:mm" style={pickerStyle} className="custom-time-picker"/>
+            </Flex>
             <Button
               bg={buttonBg}
               _hover={{ bg: isOn ? '#42ffaf' : '#FF7875' }}
