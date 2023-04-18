@@ -84,7 +84,7 @@ function SignIn() {
                   size="lg"
                 />
                 <FormLabel w="99.43px" h="25.71px" left="513.71px" top="493.14px" fontSize="18px" fontWeight="normal">
-                  Password
+                  Passwordo
                 </FormLabel>
                 <Input
                   w="480px"
