@@ -27,35 +27,26 @@ function SignIn() {
         w="100%"
         maxW="1044px"
         mx="auto"
-        justifyContent="space-between"
-        mb="30px"
-        pt={{ sm: "100px", md: "0px" }}>
+        justifyContent="center"
+        b="50%"
+        alignItems="center"
+        textAlign="center"
+        >
 
-        <Flex
-          alignItems="center"
-          justifyContent="start"
-          style={{ userSelect: "none" }}
-          w={{ base: "100%", md: "50%", lg: "42%" }}>
-
-          <Flex
-            direction="column"
-            w="100%"
-            background="transparent"
-            p="48px"
-            mt={{ md: "150px", lg: "80px" }}>
-
-            <Box
-              bg="#fff"
-              p={4}
-              alignItems="center"
-              justifyContent="center"
-              color="black"
-              borderRadius="lg"
-              boxShadow="md"
-              h="505px"
-              w="585px"
-              top="239px"
-              left="464px">
+      
+              <Box
+                position="absolute"
+                bg="#fff"
+                p={4}
+                color="black"
+                borderRadius="20px"
+                h="505px"
+                w="585px"
+                top="50%"
+                left="50%"
+                transform="translate(-50%, -50%)"
+                boxShadow="0px 0px 20px 7px rgba(0, 0, 0, 0.1)"
+              >
 
               <Heading
                 color={titleColor}
@@ -78,11 +69,13 @@ function SignIn() {
                 Object Detection
               </Heading>
               <FormControl>
-                <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
+                <FormLabel  w="54.86px" h="25.71px" left="513.71px" top="368px" fontSize="18px" fontWeight="normal">
                   Email
                 </FormLabel>
 
                 <Input
+                  w="480px"
+                  h="56.57px"
                   borderRadius="15px"
                   mb="24px"
                   fontSize="sm"
@@ -90,10 +83,13 @@ function SignIn() {
                   placeholder="Your email adress"
                   size="lg"
                 />
-                <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
+                <FormLabel w="99.43px" h="25.71px" left="513.71px" top="493.14px" fontSize="18px" fontWeight="normal">
                   Password
                 </FormLabel>
                 <Input
+                  w="480px"
+                  h="56.57px"
+                  top="67px"
                   borderRadius="15px"
                   mb="36px"
                   fontSize="sm"
@@ -106,11 +102,11 @@ function SignIn() {
                   fontSize="10px"
                   type="submit"
                   bg="teal.300"
-                  w="100%"
-                  h="45"
-                  mb="20px"
+                  w="480px"
+                  h="56.57px"
+                  mb="50.43px"
                   color="white"
-                  mt="20px"
+                  mt="90px"
                   _hover={{
                     bg: "teal.200",
                   }}
@@ -125,8 +121,7 @@ function SignIn() {
             </Box>
           </Flex>
         </Flex>
-      </Flex>
-    </Flex>
+   
   );
 }
 
