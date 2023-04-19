@@ -18,20 +18,20 @@ function TablesTableRow(props) {
 
   return (
     <Tr>
-      <Td minWidth={{ sm: "250px" }} pl="0px">
+      <Td minWidth={{ sm: "120px" }} pl="0px">
         <Flex align="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
-          <Avatar src={logo} w="50px" borderRadius="12px" me="18px" />
+          {/* <Avatar src={logo} w="50px" borderRadius="12px" me="18px" /> */}
           <Flex direction="column">
-            <Text
+            {/* <Text
               fontSize="md"
               color={textColor}
               fontWeight="bold"
               minWidth="100%"
             >
               {name}
-            </Text>
-            <Text fontSize="sm" color="gray.400" fontWeight="normal">
-              {email}
+            </Text> */}
+            <Text fontSize="sm" color={textColor} fontWeight="normal">
+              {name}
             </Text>
           </Flex>
         </Flex>
@@ -39,18 +39,26 @@ function TablesTableRow(props) {
 
       <Td>
         <Flex direction="column">
-          <Text fontSize="md" color={textColor} fontWeight="bold">
-            {domain}
-          </Text>
-          <Text fontSize="sm" color="gray.400" fontWeight="normal">
-            {subdomain}
+          <Text fontSize="sm" color={textColor} fontWeight="normal">
+            {email}
           </Text>
         </Flex>
       </Td>
       <Td>
         <Badge
-          bg={status === "Online" ? "green.400" : bgStatus}
-          color={status === "Online" ? "white" : colorStatus}
+          bg="green.400"
+          color="white"
+          fontSize="16px"
+          p="3px 10px"
+          borderRadius="8px"
+        >
+          {domain}
+        </Badge>
+      </Td>
+      <Td>
+      <Badge
+          bg={status === "Active" ? "green.400" : "red.400"}
+          color={status === "Active" ? "white" : colorStatus}
           fontSize="16px"
           p="3px 10px"
           borderRadius="8px"
@@ -58,12 +66,7 @@ function TablesTableRow(props) {
           {status}
         </Badge>
       </Td>
-      <Td>
-        <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-          {date}
-        </Text>
-      </Td>
-      <Td>
+      {/* <Td>
         <Button p="0px" bg="transparent" variant="no-hover">
           <Text
             fontSize="md"
@@ -74,7 +77,7 @@ function TablesTableRow(props) {
             Edit
           </Text>
         </Button>
-      </Td>
+      </Td> */}
     </Tr>
   );
 }
