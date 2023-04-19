@@ -363,6 +363,34 @@ export const newestTransactions = [
   },
 ];
 
+export const historyData = [
+  {
+    tanggal: "24 March 2023",
+    sensor: "Sensor 1",
+    jenis: "kucing",
+    jam: "12:00",
+  },
+  {
+    tanggal: "25 March 2023",
+    sensor: "Sensor 2",
+    jenis: "manusia",
+    jam: "12:00",
+  },
+  {
+    tanggal: "26 March 2023",
+    sensor: "Sensor 2",
+    jenis: "anjing",
+    jam: "12:00",
+  },
+  {
+    tanggal: "27 March 2023",
+    sensor: "Sensor 3",
+    jenis: "kucing",
+    jam: "12:00",
+  },
+
+];
+
 export const olderTransactions = [
   {
     name: "Stripe",

@@ -38,7 +38,7 @@ import 'antd/dist/reset.css';
 import { useState } from "react";
 import Bell from "assets/img/Bell.png";
 import Card from "components/Card/Card";
-import { tablesTableData, dashboardTableData } from "variables/general";
+import { tablesTableData, historyData } from "variables/general";
 import HistoryDashboard from "./components/HistoryDashboard";
 
 
@@ -101,7 +101,7 @@ export default function Dashboard() {
       />
       <HistoryDashboard
         title={"History"}
-        data={dashboardTableData}
+        data={historyData}
       />
 
     </Grid >
