@@ -15,10 +15,11 @@ import {
 } from "@chakra-ui/react";
 // Assets
 import shield2 from "assets/img/shield 2.png";
+import OBJ from "assets/img/Object Detection.png";
 
 function SignIn() {
   // Chakra color mode
-  const titleColor = useColorModeValue("teal.300", "teal.200");
+  
   const textColor = useColorModeValue("gray.400", "white");
   return (
     <Flex position="relative" mb="40px">
@@ -49,16 +50,17 @@ function SignIn() {
               >
 
               <Heading
-                color={titleColor}
-                fontFamily="Inter"
-                fontStyle="normal"
-                fontSize="32px"
+               
+                position="relative"
+                top="33px"
+               
                 mb="10px"
                 alignItems="center"
                 display="flex"
                 justifyContent="center">
 
                 <img
+                  
                   src={shield2}
                   alt="shield2"
                   w="46px"
@@ -66,10 +68,17 @@ function SignIn() {
                   left="569px"
                   top="288px"
                   position="absolute"></img>
-                Object Detection
+                 <img
+                  src={OBJ}
+                  alt="OBJ"
+                  w="46px"
+                  h="46px"
+                  left="569px"
+                  position="relative"
+                  ></img>
               </Heading>
               <FormControl>
-                <FormLabel  w="54.86px" h="25.71px" left="513.71px" top="368px" fontSize="18px" fontWeight="normal">
+                <FormLabel position="relative" w="54.86px" h="25.71px" left="42px" top="44px" fontSize="18px" fontWeight="700">
                   Email
                 </FormLabel>
 
@@ -77,14 +86,15 @@ function SignIn() {
                   w="480px"
                   h="56.57px"
                   borderRadius="15px"
+                  top="50px"
                   mb="24px"
                   fontSize="sm"
                   type="text"
                   placeholder="Your email adress"
                   size="lg"
                 />
-                <FormLabel w="99.43px" h="25.71px" left="513.71px" top="493.14px" fontSize="18px" fontWeight="normal">
-                  Passwordo
+                <FormLabel position="relative" w="99.43px" h="25.71px" left="42px" top="60px"  fontSize="18px" fontWeight="700" >
+                  Password
                 </FormLabel>
                 <Input
                   w="480px"
@@ -99,7 +109,7 @@ function SignIn() {
                 />
 
                 <Button
-                  fontSize="10px"
+                  fontSize="18px"
                   type="submit"
                   bg="teal.300"
                   w="480px"
@@ -107,6 +117,7 @@ function SignIn() {
                   mb="50.43px"
                   color="white"
                   mt="90px"
+                  
                   _hover={{
                     bg: "teal.200",
                   }}

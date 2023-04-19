@@ -79,10 +79,7 @@ export default function AuthNavbar(props) {
       alignItems="center"
       color={mainText}
     >
-      <CreativeTimLogo w="32px" h="32px" me="10px" />
-      <Text fontSize="sm" mt="3px">
-        {logoText}
-      </Text>
+     
     </Link>
   );
   var linksAuth = (
@@ -96,42 +93,15 @@ export default function AuthNavbar(props) {
           me={{ sm: "2px", md: "16px" }}
           color={navbarIcon}
           variant="transparent-with-icon"
-          leftIcon={<HomeIcon color={navbarIcon} w="12px" h="12px" me="0px" />}
+          
         >
-          <Text>Dashboard</Text>
-        </Button>
-      </NavLink>
-      <NavLink to="/admin/profile">
-        <Button
-          fontSize="sm"
-          ms="0px"
-          me="0px"
-          px="0px"
-          me={{ sm: "2px", md: "16px" }}
-          color={navbarIcon}
-          variant="transparent-with-icon"
-          leftIcon={
-            <PersonIcon color={navbarIcon} w="12px" h="12px" me="0px" />
-          }
-        >
-          <Text>Profile</Text>
+        
+        
+         
         </Button>
       </NavLink>
       <NavLink to="/auth/signup">
-        <Button
-          fontSize="sm"
-          ms="0px"
-          me="0px"
-          px="0px"
-          me={{ sm: "2px", md: "16px" }}
-          color={navbarIcon}
-          variant="transparent-with-icon"
-          leftIcon={
-            <RocketIcon color={navbarIcon} w="12px" h="12px" me="0px" />
-          }
-        >
-          <Text>Sign Up</Text>
-        </Button>
+        
       </NavLink>
       <NavLink to="/auth/signin">
         <Button
@@ -141,64 +111,23 @@ export default function AuthNavbar(props) {
           me={{ sm: "2px", md: "16px" }}
           color={navbarIcon}
           variant="transparent-with-icon"
-          leftIcon={
-            <DocumentIcon color={navbarIcon} w="12px" h="12px" me="0px" />
-          }
+          
         >
-          <Text>Sign In</Text>
+         
         </Button>
       </NavLink>
     </HStack>
   );
   return (
     <Flex
-      position={navbarPosition}
-      top="16px"
-      left="50%"
-      transform="translate(-50%, 0px)"
-      background={navbarBg}
-      border={navbarBorder}
-      boxShadow={navbarShadow}
-      filter={navbarFilter}
-      backdropFilter={navbarBackdrop}
-      borderRadius="15px"
-      px="16px"
-      py="22px"
-      mx="auto"
-      width="1044px"
-      maxW="90%"
-      alignItems="center"
+      
     >
       <Flex w="100%" justifyContent={{ sm: "start", lg: "space-between" }}>
         {brand}
-        <Box
-          ms={{ base: "auto", lg: "0px" }}
-          display={{ base: "flex", lg: "none" }}
-        >
-          <SidebarResponsive
-            logoText={props.logoText}
-            secondary={props.secondary}
-            routes={routes}
-            // logo={logo}
-            {...rest}
-          />
-        </Box>
+       
         {linksAuth}
         <Link href="https://creative-tim.com/product/purity-ui-dashboard">
-          <Button
-            bg={bgButton}
-            color={colorButton}
-            fontSize="xs"
-            variant="no-hover"
-            borderRadius="35px"
-            px="30px"
-            display={{
-              sm: "none",
-              lg: "flex",
-            }}
-          >
-            Free Download
-          </Button>
+          
         </Link>
       </Flex>
     </Flex>
