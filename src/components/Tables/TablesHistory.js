@@ -62,6 +62,11 @@ function TablesHistory(props) {
             {tanggal}
           </Text>
         </Td>
+        <Td>
+        <Button bg="#00DC7F" color="white" _hover={{ bg: "#00d179" }} width="100px" height="32px" borderRadius="lg">
+            Lihat Photo
+          </Button>
+        </Td>
     </Tr>
 
   );
