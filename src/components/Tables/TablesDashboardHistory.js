@@ -18,7 +18,7 @@ function TablesDashboardHistory(props) {
 
   return (
     <Tr>
-      <Flex alignSelf="center">
+      <Flex justifyContent="center">
         <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
           {tanggal}
         </Text>
