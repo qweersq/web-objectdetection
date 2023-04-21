@@ -15,6 +15,7 @@ import {
   MenuList,
   Text,
   useColorModeValue,
+  Link
 } from "@chakra-ui/react";
 // Assets
 import avatar1 from "assets/img/avatars/avatar1.png";
