@@ -21,6 +21,11 @@ function SignIn() {
   // Chakra color mode
 
   const textColor = useColorModeValue("gray.400", "white");
+  const inputStyle = {border: '1px solid #000', borderRadius: '10px', height: '56.57px', width: '480px', margin: '15px'};
+  const OBJStyle = {top: '2px', left: '26%', position: 'absolute'}
+  const shieldStyle = {top: '-1px', left: '18%', position: 'absolute'}
+  const boxStyle = {border: '1px solid #FFFFFF', borderRadius: '20px', height: '505px', width: '585px', boxShadow: '0px 0px 20px 7px rgba(0, 0, 0, 0.1)' };
+
   return (
     <Flex position="relative" mb="40px">
       <Flex
@@ -38,38 +43,34 @@ function SignIn() {
           bg="#fff"
           p={4}
           color="black"
-          borderRadius="20px"
-          h="505px"
-          w="585px"
+          style={boxStyle}
           top="50%"
           left="50%"
           transform="translate(-50%, -50%)"
-          boxShadow="0px 0px 20px 7px rgba(0, 0, 0, 0.1)"
+          
         >
           <Heading
             position="relative"
             top="33px"
             mb="10px"
-            alignItems="center"
             display="flex"
             justifyContent="center"
           >
             <img
               src={shield2}
               alt="shield2"
+              justifyContent="space-between"
               w="46px"
               h="46px"
-              left="569px"
-              top="288px"
-              position="absolute"
+              style={shieldStyle}
             ></img>
             <img
-              position="relative"
               src={OBJ}
               alt="OBJ"
               w="46px"
               h="46px"
-              left="569px"
+              style={OBJStyle}
+              
               
             ></img>
           </Heading>
@@ -79,7 +80,7 @@ function SignIn() {
               w="54.86px"
               h="25.71px"
               left="42px"
-              top="44px"
+              top="102px"
               fontSize="18px"
               fontWeight="700"
             >
@@ -87,14 +88,11 @@ function SignIn() {
             </FormLabel>
 
             <Input
-              w="480px"
-              h="56.57px"
-              borderRadius="15px"
-              top="50px"
+              style={inputStyle}
+              top="90px"
               mb="24px"
               fontSize="sm"
               type="text"
-              placeholder="Your email adress"
               size="lg"
             />
             <FormLabel
@@ -102,33 +100,30 @@ function SignIn() {
               w="99.43px"
               h="25.71px"
               left="42px"
-              top="60px"
+              top="102px"
               fontSize="18px"
               fontWeight="700"
             >
               Password
             </FormLabel>
             <Input
-              w="480px"
-              h="56.57px"
-              top="67px"
-              borderRadius="15px"
+              style={inputStyle}
+              top="90px"
               mb="36px"
               fontSize="sm"
               type="password"
-              placeholder="Your password"
               size="lg"
             />
 
             <Button
               fontSize="18px"
               type="submit"
-              bg="teal.300"
+              bg="linear-gradient(89.95deg, #00DC7F -1.21%, #00A861 99.96%)"
               w="480px"
               h="56.57px"
               mb="50.43px"
               color="white"
-              mt="90px"
+              top="129px"
               _hover={{
                 bg: "teal.200",
               }}
@@ -136,7 +131,7 @@ function SignIn() {
                 bg: "teal.400",
               }}
             >
-              SIGN IN
+              Sign In
             </Button>
           </FormControl>
         </Box>
