@@ -98,13 +98,13 @@ function TableAccount(props) {
                                         <FormControl>
                                             <FormLabel htmlFor="name">Name</FormLabel>
                                             <Input style={inputStyle} id="name" placeholder="Enter name" />
-                                            <FormLabel htmlFor="name" top="150px">Role</FormLabel>
+                                            <FormLabel htmlFor="name" mt={4}>Role</FormLabel>
                                             <Input style={inputStyle} id="role" placeholder="Enter Role" />
-                                            <FormLabel htmlFor="name">Email</FormLabel>
+                                            <FormLabel htmlFor="name" mt={4}>Email</FormLabel>
                                             <Input style={inputStyle} id="email" placeholder="Enter Email" />
-                                            <FormLabel htmlFor="name">Password</FormLabel>
+                                            <FormLabel htmlFor="name" mt={4}>Password</FormLabel>
                                             <Input style={inputStyle} id="password" placeholder="Enter name" />
-                                            <FormLabel htmlFor="name">BINUS</FormLabel>
+                                            <FormLabel htmlFor="name" mt={4}>BINUS</FormLabel>
                                             <Input style={inputStyle} id="name" placeholder="Enter name" />
 
                                             <Flex flexDirection="row" alignItems="flex-end">
