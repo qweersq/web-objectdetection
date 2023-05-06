@@ -43,7 +43,7 @@ function TablesHistory(props) {
 
         <Td>
         <Badge
-          bg={status === "Aman" ? "green.400" : "red.400"}
+          bg={status === "Aman" ? "green.400" : "red.500"}
           color="white"
           fontSize="16px"
           p="3px 10px"

@@ -399,6 +399,33 @@ export const historyData = [
 
 ];
 
+export const sensorData = [
+  {
+    sensor: "Sensor 1",
+    latitude: "41.40338",
+    longitude: "2.17403",
+    status:"Active",
+  },
+  {
+    sensor: "Sensor 2",
+    latitude: "41.40338",
+    longitude: "2.17403",
+    status:"Non-active",
+  },
+  {
+    sensor: "Sensor 3",
+    latitude: "41.40338",
+    longitude: "2.17403",
+    status:"Active",
+  },
+  {
+    sensor: "Sensor 4",
+    latitude: "41.40338",
+    longitude: "2.17403",
+    status:"Non-active",
+  },
+];
+
 export const olderTransactions = [
   {
     name: "Stripe",
