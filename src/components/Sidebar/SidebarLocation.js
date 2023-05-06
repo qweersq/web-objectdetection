@@ -11,20 +11,36 @@ import {
     ModalBody,
     ModalCloseButton,
     Grid,
-    Box
+    FormControl,
+    FormLabel,
+    FormErrorMessage,
+    FormHelperText,
+    Input
 
 } from "@chakra-ui/react";
 import Card from "components/Card/Card";
 import CardHeader from "components/Card/CardHeader";
 import React from "react";
+import { Formik, Form, Field } from "formik";
 import { useDisclosure } from "@chakra-ui/react";
 
 
 
 export function SidebarLocation() {
+    function validateName(value) {
+        let error
+        if (!value) {
+          error = "Name is required"
+        } else if (value.toLowerCase() !== "naruto") {
+          error = "Jeez! You're not a fan 😱"
+        }
+        return error
+      }
 
     const textColor = useColorModeValue("gray.700", "white");
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const { isOpen: isOpen2, onOpen: onOpen2, onClose: onClose2 } = useDisclosure();
+
 
     return (
         <Card p="1rem" my={{ sm: "24px", xl: "0px" }} boxShadow="md">
@@ -39,12 +55,11 @@ export function SidebarLocation() {
                 </Flex>
             </CardHeader>
             <Flex justify="space-between" align="" flexDirection="column" minHeight="30px" w="100%">
-                {/* <Button bg="#00A861" _hover={{ bg: "#00d179" }} size="xs" color={"white"}> */}
-                <Button bg="#00A861" _hover={{ bg: "#00d179" }} size="xs" color={"white"} onClick={onOpen}>Open Modal</Button>
-                <Modal onClose={onClose} isOpen={isOpen} isCentered>
+                <Button bg="#00A861" _hover={{ bg: "#00d179" }} size="xs" color={"white"} onClick={onOpen2}>Open Modal</Button>
+                <Modal onClose={onClose2} isOpen={isOpen2} isCentered>
                     <ModalOverlay />
                     <ModalContent maxW="56rem" w="90%">
-                        <ModalHeader> Change Location <Button bg="#00A861" _hover={{ bg: "#00d179" }} size="sm" color={"white"} ml="20px">Create</Button></ModalHeader>
+                        <ModalHeader> Change Location <Button bg="#00A861" _hover={{ bg: "#00d179" }} size="sm" color={"white"} ml="20px" onClick={onOpen}>Create</Button></ModalHeader>
                         <ModalCloseButton />
                         <ModalBody>
                             <Grid templateColumns="repeat(3, 1fr)" gap={6}>
@@ -109,6 +124,42 @@ export function SidebarLocation() {
                                     </Flex>
                                 </Card>
                             </Grid>
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button onClick={onClose2}>Close</Button>
+                        </ModalFooter>
+                    </ModalContent>
+                </Modal>
+                <Modal onClose={onClose} isOpen={isOpen} isCentered>
+                    <ModalOverlay />
+                    <ModalContent maxW="36rem" w="90%">
+                        <ModalHeader> Create Location</ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                            <Formik initialValues={{ name: "Sasuke" }} onSubmit={(values, actions) => { setTimeout(() => { alert(JSON.stringify(values, null, 2))
+                                        actions.setSubmitting(false)
+                                    }, 1000)
+                                }}>
+                                {(props) => (
+                                    <Form>
+                                        <Field name="name" validate={validateName}>
+                                            {({ field, form }) => (
+                                                <FormControl isInvalid={form.errors.name && form.touched.name}>
+                                                    <FormLabel htmlFor="name">Nama</FormLabel>
+                                                    <Input id="name" placeholder="Nama" />
+                                                    <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+                                                    <FormLabel htmlFor="name" mt={4}>Location</FormLabel>
+                                                    <Input id="name" placeholder="Location" />
+                                                    <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+                                                </FormControl>
+                                            )}
+                                        </Field>
+                                        <Button mt={4} colorScheme="teal" isLoading={props.isSubmitting} type="submit" bg="#00A861" _hover={{ bg: "#00d179" }} color={"white"} w="100%">
+                                            Create
+                                        </Button>
+                                    </Form>
+                                )}
+                            </Formik>
                         </ModalBody>
                         <ModalFooter>
                             <Button onClick={onClose}>Close</Button>
