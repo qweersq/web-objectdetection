@@ -40,6 +40,8 @@ import Bell from "assets/img/Bell.png";
 import Card from "components/Card/Card";
 import { tablesTableData, historyData } from "variables/general";
 import HistoryDashboard from "./components/HistoryDashboard";
+import Maps from "./components/Maps";
+
 
 
 
@@ -59,6 +61,7 @@ export default function Dashboard() {
 
 
   return (
+    <>
     <Grid templateColumns="repeat(2, 1fr)" gap={2} pt={{ base: "120px", md: "75px" }}>
       <Card p={4} color="black" borderRadius="lg" boxShadow="md" width="100%">
         <Flex justifyContent="space-between" alignItems="center">
@@ -103,8 +106,10 @@ export default function Dashboard() {
         title={"History"}
         data={historyData}
       />
-
     </Grid >
-
+    <Grid pt={{ base: "120px", md: "10px" }}>
+      <Maps/>
+    </Grid>
+    </>
   );
 }
