@@ -1,18 +1,20 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, Heading, StylesProvider } from "@chakra-ui/react";
 import React from "react";
-import Projects from "../Billing/components/Projects";
-import { tablesTableData, dashboardTableData } from "variables/general";
+import TablesTableRow from "components/Tables/TablesTableRow";
+import Account from "./components/Account";
+import { useStyles } from "@chakra-ui/react";
+import { sensorData } from "variables/general";
+import { accountData } from "variables/general";
 
-function Billing() {
+function Tables() {
   return (
     <Flex direction='column' pt={{ base: "120px", md: "75px" }}>
-      <Projects
-        title={"Account Tables"}
-        captions={["Companies", "Budget", "Status", "Completion", ""]}
-        data={dashboardTableData}
-      />
+        <Account
+          title={"Account"}
+          captions={["Name", "Email", "Role", "Status", "Action"]}
+          data={accountData}/>
     </Flex>
   );
 }
 
-export default Billing;
+export default Tables;
