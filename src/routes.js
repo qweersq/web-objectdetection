@@ -3,6 +3,7 @@ import Dashboard from "views/Dashboard/Dashboard";
 import Tables from "views/Dashboard/Tables";
 import Billing from "views/Dashboard/Billing";
 import Profile from "views/Dashboard/Profile";
+import Sensor from "views/Dashboard/Sensor";
 import SignIn from "views/Auth/SignIn.js";
 import SignUp from "views/Auth/SignUp.js";
 
@@ -39,6 +40,13 @@ var dashRoutes = [
     rtlName: "لوحة القيادة",
     icon: <CreditIcon color="inherit" />,
     component: Billing,
+    layout: "/admin",
+  },
+  {
+    path: "/sensor",
+    name: "Sensor",
+    icon: <SupportIcon color="inherit" />,
+    component: Sensor,
     layout: "/admin",
   },
   {
