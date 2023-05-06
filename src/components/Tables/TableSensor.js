@@ -14,9 +14,13 @@ import {
     ModalBody,
     ModalCloseButton,
     useColorModeValue,
+    FormControl,
+    FormLabel,
+    Input,
+    Switch,
 } from "@chakra-ui/react";
 import React from "react";
-import { useDisclosure } from "@chakra-ui/react"
+import { useDisclosure } from "@chakra-ui/react";
 
 function TableSensor(props) {
     const { sensor, latitude, longtitude, status } = props;
@@ -71,56 +75,38 @@ function TableSensor(props) {
                             Delete
                         </Button>
                     </Flex>
+                    <Modal isOpen={isOpen} onClose={onClose} isCentered>
+                        <ModalOverlay />
+                        <ModalContent maxW="56rem" minW="24.375rem" maxh="482px">
+                            <ModalHeader color="green.400">Edit Sensor</ModalHeader>
+                            <ModalCloseButton />
+                            <ModalBody>
+                                <Flex justifyContent="space-between">
+                                    <Flex flexDirection="column" width="100%">
+                                        <FormControl>
+                                            <FormLabel htmlFor="name">Latitude</FormLabel>
+                                            <Input id="latitude" placeholder="Latitude" />
+                                            <FormLabel htmlFor="name" mt={4}>Longtitude</FormLabel>
+                                            <Input id="longtitude" placeholder="Longtitude" />
+                                            <Flex flexDirection="row" alignItems="flex-end">
+                                                <Switch colorScheme="green" size="lg" mt={4} />
+                                                <Text fontSize="md" color={textColor} fontWeight="Bold" pl="12px">
+                                                    Status
+                                                </Text>
+                                            </Flex>
+                                            <Button bg="green.400" color="white" borderRadius="lg" w="847px" mt={4}>
+                                                Edit
+                                            </Button>
+                                        </FormControl>
+                                    </Flex>
+                                </Flex>
+                            </ModalBody>
+                            <ModalFooter justifyContent="center">
+                            </ModalFooter>
+                        </ModalContent>
+                    </Modal>
                 </Td>
             </Tr>
-
-            <Modal isOpen={isOpen} onClose={onClose}>
-                <ModalOverlay />
-                <ModalContent w="100rem" h="482px">
-                    <ModalHeader color="green.400">Create Sensor</ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody>
-                        <Flex justifyContent="space-between">
-                            <Flex flexDirection="column" width="50%">
-                                <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-                                    Sensor Name
-                                </Text>
-                                <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-                                    Latitude
-                                </Text>
-                                <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-                                    Longtitude
-                                </Text>
-                                <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-                                    Status
-                                </Text>
-                            </Flex>
-                            <Flex flexDirection="column" width="50%">
-                                <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-                                    <input type="text" name="sensor" id="sensor" placeholder="Sensor Name" />
-                                </Text>
-                                <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-                                    <input type="text" name="latitude" id="latitude" placeholder="Latitude" />
-                                </Text>
-                                <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-                                    <input type="text" name="longtitude" id="longtitude" placeholder="Longtitude" />
-                                </Text>
-                                <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-                                    <select name="status" id="status">
-                                        <option value="Active">Active</option>
-                                        <option value="Inactive">Inactive</option>
-                                    </select>
-                                </Text>
-                            </Flex>
-                        </Flex>
-                    </ModalBody>
-                    <ModalFooter justifyContent="center">
-                        <Button bg="green.400" borderRadius="lg" width="870px" onClick={onClose}>
-                            Close
-                        </Button>
-                    </ModalFooter>
-                </ModalContent>
-            </Modal>
         </>
     );
 }
