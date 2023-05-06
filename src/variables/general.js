@@ -426,6 +426,33 @@ export const sensorData = [
   },
 ];
 
+export const accountData = [
+  {
+    name: "Daniel Thomas",
+    email: "joy_sakera@gmail.com",
+    role: "Admin",
+    status: "Active",
+  },
+  {
+    name: "Daniel poko",
+    email: "Poko@gmail.com",
+    role: "Security",
+    status: "Non-Active",
+  },
+  {
+    name: "bagus",
+    email: "Bagus@gmail.com",
+    role: "Security",
+    status: "Active",
+  },
+  {
+    name: "Thomas",
+    email: "Thomas@gmail.com",
+    role: "Admin",
+    status: "Active",
+  },
+];
+
 export const olderTransactions = [
   {
     name: "Stripe",

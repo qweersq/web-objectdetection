@@ -21,10 +21,10 @@ function SignIn() {
   // Chakra color mode
 
   const textColor = useColorModeValue("gray.400", "white");
-  const inputStyle = {border: '1px solid #000', borderRadius: '10px', height: '56.57px', width: '480px', margin: '15px'};
-  const OBJStyle = {top: '2px', left: '26%', position: 'absolute'}
-  const shieldStyle = {top: '-1px', left: '18%', position: 'absolute'}
-  const boxStyle = {border: '1px solid #FFFFFF', borderRadius: '20px', height: '505px', width: '585px', boxShadow: '0px 0px 20px 7px rgba(0, 0, 0, 0.1)' };
+  const inputStyle = {border: "1px solid #000",borderRadius: "10px",height: "56.57px",width: "480px",margin: "15px",};
+  const OBJStyle = { top: "2px", left: "26%", position: "absolute" };
+  const shieldStyle = { top: "-1px", left: "18%", position: "absolute" };
+  const boxStyle = {border: "1px solid #FFFFFF",borderRadius: "20px",height: "505px",width: "585px",boxShadow: "0px 0px 20px 7px rgba(0, 0, 0, 0.1)",};
 
   return (
     <Flex position="relative" mb="40px">
@@ -47,7 +47,6 @@ function SignIn() {
           top="50%"
           left="50%"
           transform="translate(-50%, -50%)"
-          
         >
           <Heading
             position="relative"
@@ -56,23 +55,8 @@ function SignIn() {
             display="flex"
             justifyContent="center"
           >
-            <img
-              src={shield2}
-              alt="shield2"
-              justifyContent="space-between"
-              w="46px"
-              h="46px"
-              style={shieldStyle}
-            ></img>
-            <img
-              src={OBJ}
-              alt="OBJ"
-              w="46px"
-              h="46px"
-              style={OBJStyle}
-              
-              
-            ></img>
+            <img src={shield2} alt="shield2" w="46px" h="46px" style={shieldStyle}></img>
+            <img src={OBJ} alt="OBJ" w="46px" h="46px" style={OBJStyle}></img>
           </Heading>
           <FormControl>
             <FormLabel
