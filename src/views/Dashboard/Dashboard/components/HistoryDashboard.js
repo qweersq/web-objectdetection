@@ -12,7 +12,7 @@ import {
   import Card from "components/Card/Card.js";
   import CardBody from "components/Card/CardBody.js";
   import CardHeader from "components/Card/CardHeader.js";
-import TablesDashboardHistory from "components/Tables/TablesDashboardHistory";
+  import TablesDashboardHistory from "components/Tables/TablesDashboardHistory";
   import TablesTableRow from "components/Tables/TablesTableRow";
   import React from "react";
   
