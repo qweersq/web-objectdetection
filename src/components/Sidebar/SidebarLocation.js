@@ -30,12 +30,12 @@ export function SidebarLocation() {
     function validateName(value) {
         let error
         if (!value) {
-          error = "Name is required"
+            error = "Name is required"
         } else if (value.toLowerCase() !== "naruto") {
-          error = "Jeez! You're not a fan 😱"
+            error = "Jeez! You're not a fan 😱"
         }
         return error
-      }
+    }
 
     const textColor = useColorModeValue("gray.700", "white");
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -136,10 +136,12 @@ export function SidebarLocation() {
                         <ModalHeader> Create Location</ModalHeader>
                         <ModalCloseButton />
                         <ModalBody>
-                            <Formik initialValues={{ name: "Sasuke" }} onSubmit={(values, actions) => { setTimeout(() => { alert(JSON.stringify(values, null, 2))
-                                        actions.setSubmitting(false)
-                                    }, 1000)
-                                }}>
+                            <Formik initialValues={{ name: "Sasuke" }} onSubmit={(values, actions) => {
+                                setTimeout(() => {
+                                    alert(JSON.stringify(values, null, 2))
+                                    actions.setSubmitting(false)
+                                }, 1000)
+                            }}>
                                 {(props) => (
                                     <Form>
                                         <Field name="name" validate={validateName}>
