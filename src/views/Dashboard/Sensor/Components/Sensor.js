@@ -54,7 +54,7 @@ const Sensor = ({ title, captions, data }) => {
                                     <FormControl>
                                         <FormLabel htmlFor="name">Sensor ID</FormLabel>
                                         <Input id="sensorid" placeholder="Sensor ID" />
-                                        <FormLabel htmlFor="name">Latitude</FormLabel>
+                                        <FormLabel htmlFor="name" mt={4}>Latitude</FormLabel>
                                         <Input id="latitude" placeholder="Latitude" />
                                         <FormLabel htmlFor="name" mt={4}>Longtitude</FormLabel>
                                         <Input id="longtitude" placeholder="Longtitude" />
