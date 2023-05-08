@@ -18,7 +18,7 @@ function TablesTableRow(props) {
 
   return (
     <Tr>
-      <Td minWidth={{ sm: "120px" }} pl="0px">
+      <Td minWidth={{ sm: "100px" }} pl="0px">
         <Flex align="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
           {/* <Avatar src={logo} w="50px" borderRadius="12px" me="18px" /> */}
           <Flex direction="column">
