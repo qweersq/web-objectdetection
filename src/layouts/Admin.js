@@ -120,7 +120,7 @@ export default function Dashboard(props) {
 					</PanelContent>
 				) : null}
 				<Footer />
-				<Portal>
+				{/* <Portal>
 					<FixedPlugin secondary={getActiveNavbar(routes)} fixed={fixed} onOpen={onOpen} />
 				</Portal>
 				<Configurator
@@ -133,7 +133,7 @@ export default function Dashboard(props) {
 					}}
 					onOpaque={() => setSidebarVariant('opaque')}
 					onTransparent={() => setSidebarVariant('transparent')}
-				/>
+				/> */}
 			</MainPanel>
 		</ChakraProvider>
 	);
