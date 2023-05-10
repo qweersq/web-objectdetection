@@ -40,6 +40,9 @@ const SidebarContent = ({ logoText, routes }) => {
     const inactiveColor = useColorModeValue("gray.400", "gray.400");
 
     return routes.map((prop, key) => {
+      if (prop.hide === true) {
+				return null;
+			}
       if (prop.redirect) {
         return null;
       }
@@ -70,8 +73,8 @@ const SidebarContent = ({ logoText, routes }) => {
         );
       }
       return (
-        <NavLink to={prop.layout + prop.path} key={prop.name}>
-          {activeRoute(prop.layout + prop.path) === "active" ? (
+        <NavLink to={prop.path} key={prop.name}>
+          {activeRoute(prop.path) === "active" ? (
             <Button
               boxSize="initial"
               justifyContent="flex-start"

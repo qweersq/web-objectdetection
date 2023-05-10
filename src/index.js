@@ -25,9 +25,8 @@ import AdminLayout from "layouts/Admin.js";
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      <Route path={`/auth`} component={AuthLayout} />
-      <Route path={`/admin`} component={AdminLayout} />
-      <Redirect from={`/`} to="/auth/signin" />
+      <Route path={`/login`} component={AuthLayout} />
+      <Route path={`/`} component={AdminLayout} />
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")

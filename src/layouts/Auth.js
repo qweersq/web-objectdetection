@@ -67,8 +67,8 @@ export default function Pages(props) {
 			if (prop.category === 'account') {
 				return getRoutes(prop.views);
 			}
-			if (prop.layout === '/auth') {
-				return <Route path={prop.layout + prop.path} component={prop.component} key={key} />;
+			if (prop.layout === '/login') {
+				return <Route path={prop.path} component={prop.component} key={key} />;
 			} else {
 				return null;
 			}

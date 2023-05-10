@@ -18,7 +18,7 @@ import {
   const AccountDashboard = ({ title, captions, data }) => {
     const textColor = useColorModeValue("gray.700", "white");
     return (
-      <Card overflowX={{ sm:"scroll", xl:"hidden" }}>
+      <Card overflowX={{ sm:"scroll", xl:"hidden" }} boxShadow="md">
         <CardHeader p='6px 0px 22px 0px'>
           <Text fontSize='xl' color={textColor} fontWeight='bold' >
             {title}

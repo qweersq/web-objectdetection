@@ -114,6 +114,9 @@ function SignIn() {
               _active={{
                 bg: "teal.400",
               }}
+              onClick={() => {
+                window.location.href = `/dashboard`;
+              }}
             >
               Sign In
             </Button>
