@@ -64,6 +64,7 @@ var dashRoutes = [
     component: SignIn,
     layout: "/login",
   },
+  
   // {
   //   name: "ACCOUNT PAGES",
   //   category: "account",

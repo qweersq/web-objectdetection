@@ -41,7 +41,7 @@ export default function Dashboard(props) {
 					return categoryActiveRoute;
 				}
 			} else {
-				if (window.location.href.indexOf(routes[i].layout + routes[i].path) !== -1) {
+				if (window.location.href.indexOf(routes[i].path) !== -1) {
 					return routes[i].name;
 				}
 			}

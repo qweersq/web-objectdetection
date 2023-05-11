@@ -54,7 +54,7 @@ export default function HeaderLinks(props) {
       w={{ sm: "100%", md: "auto" }}
       alignItems="center"
       flexDirection="row"
-      // justifyContent="flex-end"
+    // justifyContent="flex-end"
     >
       {/* <InputGroup
         cursor="pointer"
@@ -123,7 +123,7 @@ export default function HeaderLinks(props) {
           <Text display={{ sm: "none", md: "flex" }}>Sign In</Text>
         </Button>
       </NavLink> */}
-      
+
       <Flex
         justifyContent="space-between"
         alignItems="center"
@@ -142,7 +142,9 @@ export default function HeaderLinks(props) {
         // logo={logo}
         {...rest}
       />
-      <Button bg="red.500" _hover={{ bg: "#eb7668" }} size="sm" color={"white"} ml="16px" borderRadius="lg">
+      <Button bg="red.500" _hover={{ bg: "#eb7668" }} size="sm" color={"white"} ml="16px" borderRadius="lg" onClick={() => {
+        window.location.href = `/login`;
+      }}>
         Logout
       </Button>
       {/* <SettingsIcon
