@@ -20,12 +20,12 @@ const AccountDashboard = ({ title, captions, data }) => {
   const textColor = useColorModeValue("gray.700", "white");
   return (
     <Card boxShadow="md">
-      <TableContainer>
         <CardHeader p='6px 0px 22px 0px'>
           <Text fontSize='xl' color={textColor} fontWeight='bold' >
             {title}
           </Text>
         </CardHeader>
+      <TableContainer>
         <CardBody>
           <Table variant='simple' color={textColor}>
             <Thead>

@@ -64,40 +64,5 @@ var dashRoutes = [
     component: SignIn,
     layout: "/login",
   },
-  
-  // {
-  //   name: "ACCOUNT PAGES",
-  //   category: "account",
-  //   rtlName: "صفحات",
-  //   state: "pageCollapse",
-  //   views: [
-  //     {
-  //       path: "/profile",
-  //       name: "Profile",
-  //       rtlName: "لوحة القيادة",
-  //       icon: <PersonIcon color="inherit" />,
-  //       secondaryNavbar: true,
-  //       component: Profile,
-  //       layout: "/admin",
-  //     },
-  //     {
-  //       path: "/signin",
-  //       name: "Sign In",
-  //       rtlName: "لوحة القيادة",
-  //       icon: <DocumentIcon color="inherit" />,
-  //       component: SignIn,
-  //       layout: "/auth",
-  //     },
-  //     {
-  //       path: "/signup",
-  //       name: "Sign Up",
-  //       rtlName: "لوحة القيادة",
-  //       icon: <RocketIcon color="inherit" />,
-  //       secondaryNavbar: true,
-  //       component: SignUp,
-  //       layout: "/auth",
-  //     },
-  //   ],
-  // },
 ];
 export default dashRoutes;
