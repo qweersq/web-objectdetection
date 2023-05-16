@@ -17,8 +17,11 @@ import {
   SupportIcon,
 } from "components/Icons/Icons";
 
+
+
 var dashRoutes = [
   {
+    hide : false,
     path: "/dashboard",
     name: "Dashboard",
     rtlName: "لوحة القيادة",
@@ -27,7 +30,8 @@ var dashRoutes = [
     layout: "/admin",
   },
   {
-    path: "/tables",
+    hide : false,
+    path: "/histories",
     name: "History",
     rtlName: "لوحة القيادة",
     icon: <StatsIcon color="inherit" />,
@@ -35,7 +39,8 @@ var dashRoutes = [
     layout: "/admin",
   },
   {
-    path: "/billing",
+    hide : false,
+    path: "/accounts",
     name: "Account",
     rtlName: "لوحة القيادة",
     icon: <CreditIcon color="inherit" />,
@@ -43,45 +48,21 @@ var dashRoutes = [
     layout: "/admin",
   },
   {
-    path: "/sensor",
+    hide : false,
+    path: "/sensors",
     name: "Sensor",
     icon: <SupportIcon color="inherit" />,
     component: Sensor,
     layout: "/admin",
   },
   {
-    name: "ACCOUNT PAGES",
-    category: "account",
-    rtlName: "صفحات",
-    state: "pageCollapse",
-    views: [
-      {
-        path: "/profile",
-        name: "Profile",
-        rtlName: "لوحة القيادة",
-        icon: <PersonIcon color="inherit" />,
-        secondaryNavbar: true,
-        component: Profile,
-        layout: "/admin",
-      },
-      {
-        path: "/signin",
-        name: "Sign In",
-        rtlName: "لوحة القيادة",
-        icon: <DocumentIcon color="inherit" />,
-        component: SignIn,
-        layout: "/auth",
-      },
-      {
-        path: "/signup",
-        name: "Sign Up",
-        rtlName: "لوحة القيادة",
-        icon: <RocketIcon color="inherit" />,
-        secondaryNavbar: true,
-        component: SignUp,
-        layout: "/auth",
-      },
-    ],
+    hide : true,
+    path: "/login",
+    name: "Sign In",
+    rtlName: "لوحة القيادة",
+    icon: <DocumentIcon color="inherit" />,
+    component: SignIn,
+    layout: "/login",
   },
 ];
 export default dashRoutes;

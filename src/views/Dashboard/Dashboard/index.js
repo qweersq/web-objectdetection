@@ -62,54 +62,53 @@ export default function Dashboard() {
 
   return (
     <>
-    <Grid templateColumns="repeat(2, 1fr)" gap={2} pt={{ base: "120px", md: "75px" }}>
-      <Card p={4} color="black" borderRadius="lg" boxShadow="md" width="100%">
-        <Flex justifyContent="space-between" alignItems="center">
-          <Text fontSize="xl" fontWeight="bold" color={textColor}> Alarm Sensor</Text>
-          <Flex justifyContent="space-between" alignItems="center">
-            <TimePicker format="HH:mm" style={pickerStyle} className="custom-time-picker" />
-            <Divider
-              width="10px" borderWidth="2px" borderColor={textColor} borderRadius="3px" pl="3px"
-            />
-            <TimePicker format="HH:mm" style={pickerStyle} className="custom-time-picker" />
-          </Flex>
-          <Button
-            bg={buttonBg}
-            _hover={{ bg: isOn ? '#42ffaf' : '#FF7875' }}
-            color="white"
-            borderRadius="lg"
-            onClick={toggleButton}
-            width="77px"
-            height="29px"
-          >
-            {isOn ? 'On' : 'Off'}
-          </Button>
-        </Flex>
-
-      </Card>
-      <Card p={4} color="black" borderRadius="lg" boxShadow="md" width="100%">
-        <Flex justifyContent="space-between" alignItems="center" pt="14px">
-          <Image src={Bell}></Image>
-          <Text fontSize="xl" fontWeight="bold" color={textColor}> 124 </Text>
-          <Text fontSize="lg" mr="250px" color={textColor}> Sensor Point </Text>
-          <Button bg="#00DC7F" color="white" _hover="none" width="77px" height="29px" borderRadius="lg" _active="none">
-            Active
-          </Button>
-        </Flex>
-      </Card>
-      <AccountDashboard
-        title={"Account"}
-        // captions={["Author", "Function", "Status", "Employed", ""]}
-        data={tablesTableData}
-      />
-      <HistoryDashboard
-        title={"History"}
-        data={historyData}
-      />
-    </Grid >
-    <Grid pt={{ base: "120px", md: "10px" }}>
-      <Maps/>
-    </Grid>
+      <Grid templateColumns="repeat(2, 1fr)" gap={2} pt={{ base: "120px", md: "75px" }}>
+          <Card p={4} color="black" borderRadius="lg" boxShadow="md" width="100%">
+            <Flex justifyContent="space-between" alignItems="center">
+              <Text fontSize="xl" fontWeight="bold" color={textColor}> Alarm Sensor</Text>
+              <Flex justifyContent="space-between" alignItems="center">
+                <TimePicker format="HH:mm" style={pickerStyle} className="custom-time-picker" />
+                <Divider
+                  width="10px" borderWidth="2px" borderColor={textColor} borderRadius="3px" pl="3px"
+                />
+                <TimePicker format="HH:mm" style={pickerStyle} className="custom-time-picker" />
+              </Flex>
+              <Button
+                bg={buttonBg}
+                _hover={{ bg: isOn ? '#42ffaf' : '#FF7875' }}
+                color="white"
+                borderRadius="lg"
+                onClick={toggleButton}
+                width="77px"
+                height="29px"
+              >
+                {isOn ? 'On' : 'Off'}
+              </Button>
+            </Flex>
+          </Card>
+          <Card p={4} color="black" borderRadius="lg" boxShadow="md" width="100%">
+            <Flex justifyContent="space-between" alignItems="center" pt="14px">
+              <Image src={Bell}></Image>
+              <Text fontSize="xl" fontWeight="bold" color={textColor}> 124 </Text>
+              <Text fontSize="lg" mr="250px" color={textColor}> Sensor Point </Text>
+              <Button bg="#00DC7F" color="white" _hover="none" width="77px" height="29px" borderRadius="lg" _active="none">
+                Active
+              </Button>
+            </Flex>
+          </Card>
+          <AccountDashboard
+            title={"Account"}
+            // captions={["Author", "Function", "Status", "Employed", ""]}
+            data={tablesTableData}
+          />
+          <HistoryDashboard
+            title={"History"}
+            data={historyData}
+          />
+      </Grid >
+      <Grid pt={{ base: "120px", md: "10px" }}>
+        <Maps />
+      </Grid>
     </>
   );
 }

@@ -22,6 +22,9 @@ import { Separator } from "components/Separator/Separator";
 import { SidebarHelp } from "components/Sidebar/SidebarHelp";
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { Image } from "@chakra-ui/react";
+import SidebarLogo from "assets/img/shield 2.png";
+import { SidebarLocation } from "./SidebarLocation";
 
 function SidebarResponsive(props) {
     // to check for active links and opened collapses
@@ -201,12 +204,13 @@ function SidebarResponsive(props) {
           alignItems="center"
           fontSize="11px"
         >
-          <CreativeTimLogo w="32px" h="32px" me="10px" />
+          <Image src={SidebarLogo} w="32px" h="32px" me="10px"/>
           <Text fontSize="sm" mt="3px">
-            {logoText}
+            Object Detection
           </Text>
         </Link>
         <Separator></Separator>
+        
       </Box>
     );
   
@@ -253,6 +257,7 @@ function SidebarResponsive(props) {
             <DrawerBody maxW="250px" px="1rem">
               <Box maxW="100%" h="100vh">
                 <Box>{brand}</Box>
+                <SidebarLocation/>
                 <Stack direction="column" mb="40px">
                   <Box>{links}</Box>
                 </Stack>

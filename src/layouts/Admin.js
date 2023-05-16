@@ -41,7 +41,7 @@ export default function Dashboard(props) {
 					return categoryActiveRoute;
 				}
 			} else {
-				if (window.location.href.indexOf(routes[i].layout + routes[i].path) !== -1) {
+				if (window.location.href.indexOf(routes[i].path) !== -1) {
 					return routes[i].name;
 				}
 			}
@@ -69,6 +69,7 @@ export default function Dashboard(props) {
 	};
 	const getRoutes = (routes) => {
 		return routes.map((prop, key) => {
+			
 			if (prop.collapse) {
 				return getRoutes(prop.views);
 			}
@@ -76,8 +77,9 @@ export default function Dashboard(props) {
 				return getRoutes(prop.views);
 			}
 			if (prop.layout === '/admin') {
-				return <Route path={prop.layout + prop.path} component={prop.component} key={key} />;
-			} else {
+				return <Route path={prop.path} component={prop.component} key={key} />;
+			} 
+			else {
 				return null;
 			}
 		});
@@ -89,7 +91,7 @@ export default function Dashboard(props) {
 		<ChakraProvider theme={theme} resetCss={false}>
 			<Sidebar
 				routes={routes}
-				logoText={'PURITY UI DASHBOARD'}
+				logoText={'ObjectDetection'}
 				display='none'
 				sidebarVariant={sidebarVariant}
 				{...rest}
@@ -102,7 +104,7 @@ export default function Dashboard(props) {
 				<Portal>
 					<AdminNavbar
 						onOpen={onOpen}
-						logoText={'PURITY UI DASHBOARD'}
+						logoText={'ObjectDetection'}
 						brandText={getActiveRoute(routes)}
 						secondary={getActiveNavbar(routes)}
 						fixed={fixed}
@@ -114,26 +116,12 @@ export default function Dashboard(props) {
 						<PanelContainer>
 							<Switch>
 								{getRoutes(routes)}
-								<Redirect from='/admin' to='/admin/dashboard' />
+								<Redirect to='/dashboard' />
 							</Switch>
 						</PanelContainer>
 					</PanelContent>
 				) : null}
 				<Footer />
-				<Portal>
-					<FixedPlugin secondary={getActiveNavbar(routes)} fixed={fixed} onOpen={onOpen} />
-				</Portal>
-				<Configurator
-					secondary={getActiveNavbar(routes)}
-					isOpen={isOpen}
-					onClose={onClose}
-					isChecked={fixed}
-					onSwitch={(value) => {
-						setFixed(value);
-					}}
-					onOpaque={() => setSidebarVariant('opaque')}
-					onTransparent={() => setSidebarVariant('transparent')}
-				/>
 			</MainPanel>
 		</ChakraProvider>
 	);
