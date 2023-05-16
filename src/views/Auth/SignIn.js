@@ -17,6 +17,7 @@ import {
 // Assets
 import shield2 from "assets/img/shield 2.png";
 import OBJ from "assets/img/Object Detection.png";
+import { useState } from "react";
 
 function SignIn() {
   // Chakra color mode
@@ -33,10 +34,10 @@ function SignIn() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/api/login', { email, password });
+      const response = await axios.post('http://localhost:8080/api/login', { email, password });
       const { token } = response.data;
       // Simpan token dalam local storage
-      localStorage.setItem('token', token);
+      localStorage.setItem('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6InN1cGVyYWRtaW4iLCJicmFuY2hfaWQiOjEsImlhdCI6MTY4NDIzNTcyOSwiZXhwIjoxNjg0MjM5MzI5fQ.4mkwzDE7HpX1I_cBkmPPvD4CArBTrk5_kYOKh86Dzqo', token);
       // Redirect ke halaman dashboard
       window.location.href = '/dashboard';
     } catch (error) {
