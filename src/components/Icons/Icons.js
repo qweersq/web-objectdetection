@@ -34,6 +34,8 @@ export const AtlassianLogo = createIcon({
   ),
 });
 
+
+
 export const CartIcon = createIcon({
   displayName: "CartIcon",
   viewBox: "0 0 24 24",
