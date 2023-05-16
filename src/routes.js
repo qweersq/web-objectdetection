@@ -15,6 +15,8 @@ import {
   DocumentIcon,
   RocketIcon,
   SupportIcon,
+  ClockIcon,
+  BellIcon,
 } from "components/Icons/Icons";
 
 
@@ -34,7 +36,7 @@ var dashRoutes = [
     path: "/histories",
     name: "History",
     rtlName: "لوحة القيادة",
-    icon: <StatsIcon color="inherit" />,
+    icon: <ClockIcon color="inherit" />,
     component: Tables,
     layout: "/admin",
   },
@@ -43,7 +45,7 @@ var dashRoutes = [
     path: "/accounts",
     name: "Account",
     rtlName: "لوحة القيادة",
-    icon: <CreditIcon color="inherit" />,
+    icon: <PersonIcon color="inherit" />,
     component: Billing,
     layout: "/admin",
   },
