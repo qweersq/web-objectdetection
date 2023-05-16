@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 // Chakra imports
 import {
   Box,
@@ -25,6 +26,23 @@ function SignIn() {
   const OBJStyle = { top: "2px", left: "26%", position: "absolute" };
   const shieldStyle = { top: "-1px", left: "18%", position: "absolute" };
   const boxStyle = {border: "1px solid #FFFFFF",borderRadius: "20px",height: "505px",width: "585px",boxShadow: "0px 0px 20px 7px rgba(0, 0, 0, 0.1)",};
+  // Login jwt
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:3000/api/login', { email, password });
+      const { token } = response.data;
+      // Simpan token dalam local storage
+      localStorage.setItem('token', token);
+      // Redirect ke halaman dashboard
+      window.location.href = '/dashboard';
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <Flex position="relative" mb="40px">
@@ -78,6 +96,7 @@ function SignIn() {
               fontSize="sm"
               type="text"
               size="lg"
+              value={email} onChange={(e) => setEmail(e.target.value)}
             />
             <FormLabel
               position="relative"
@@ -97,6 +116,7 @@ function SignIn() {
               fontSize="sm"
               type="password"
               size="lg"
+              value={password} onChange={(e) => setPassword(e.target.value)}
             />
 
             <Button
@@ -117,6 +137,7 @@ function SignIn() {
               onClick={() => {
                 window.location.href = `/dashboard`;
               }}
+              onSubmit={handleLogin}
             >
               Sign In
             </Button>
