@@ -19,6 +19,10 @@ import MainPanel from "../components/Layout/MainPanel";
 import PanelContainer from "../components/Layout/PanelContainer";
 import PanelContent from "../components/Layout/PanelContent";
 import SignIn from "views/Auth/SignIn";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
+
 export default function Dashboard(props) {
   const { ...rest } = props;
   // states and functions
@@ -85,29 +89,22 @@ export default function Dashboard(props) {
       }
     });
   };
-  const isAuthenticated = localStorage.getItem("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6InN1cGVyYWRtaW4iLCJicmFuY2hfaWQiOjEsImlhdCI6MTY4NDIzNTcyOSwiZXhwIjoxNjg0MjM5MzI5fQ.4mkwzDE7HpX1I_cBkmPPvD4CArBTrk5_kYOKh86Dzqo");
 
+  const isAuthenticated = localStorage.getItem("token");
+
+  const { count, setCount } = useState(0);
+
+  // validate token to access dashboard and redirect to login if not authenticated
   const PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route
-      {...rest}
-      render={(props) =>
-        isAuthenticated ? <Component {...props} /> : <Redirect to="/login" />
-      }
-    />
+    isAuthenticated ? (
+      getRoutes(routes)
+    ) : (
+      toast("Please login to access dashboard"),
+      <Redirect to={{ pathname: "/login" }} />
+    )
   );
 
-  const PublicRoute = ({ component: Component, restricted, ...rest }) => (
-    <Route
-      {...rest}
-      render={(props) =>
-        isAuthenticated && restricted ? (
-          <Redirect to="/dashboard" />
-        ) : (
-          <Component {...props} />
-        )
-      }
-    />
-  );
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   document.documentElement.dir = "ltr";
   // Chakra Color Mode
@@ -140,20 +137,14 @@ export default function Dashboard(props) {
           <PanelContent>
             <PanelContainer>
               <Switch>
-                <PublicRoute
-                  restricted={false}
-                  component={SignIn}
-                  exact
-                  path="/login"
-                />
-                <PrivateRoute component={Dashboard} exact path="/dashboard" />
-                <Redirect to="/login" />
+                <PrivateRoute />
               </Switch>
             </PanelContainer>
           </PanelContent>
         ) : null}
         <Footer />
       </MainPanel>
+
     </ChakraProvider>
   );
 }

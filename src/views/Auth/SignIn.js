@@ -18,134 +18,142 @@ import {
 import shield2 from "assets/img/shield 2.png";
 import OBJ from "assets/img/Object Detection.png";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function SignIn() {
   // Chakra color mode
 
   const textColor = useColorModeValue("gray.400", "white");
-  const inputStyle = {border: "1px solid #000",borderRadius: "10px",height: "56.57px",width: "480px",margin: "15px",};
+  const inputStyle = { border: "1px solid #000", borderRadius: "10px", height: "56.57px", width: "480px", margin: "15px", };
   const OBJStyle = { top: "2px", left: "26%", position: "absolute" };
   const shieldStyle = { top: "-1px", left: "18%", position: "absolute" };
-  const boxStyle = {border: "1px solid #FFFFFF",borderRadius: "20px",height: "505px",width: "585px",boxShadow: "0px 0px 20px 7px rgba(0, 0, 0, 0.1)",};
+  const boxStyle = { border: "1px solid #FFFFFF", borderRadius: "20px", height: "505px", width: "585px", boxShadow: "0px 0px 20px 7px rgba(0, 0, 0, 0.1)", };
   // Login jwt
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    toast("Checking ...");
     try {
-      const response = await axios.post('http://localhost:8080/api/login', { email, password });
+      const response = await axios.post('http://localhost:3000/api/login', { email, password });
       const { token } = response.data;
+      console.log(token)
       // Simpan token dalam local storage
-      localStorage.setItem('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6InN1cGVyYWRtaW4iLCJicmFuY2hfaWQiOjEsImlhdCI6MTY4NDIzNTcyOSwiZXhwIjoxNjg0MjM5MzI5fQ.4mkwzDE7HpX1I_cBkmPPvD4CArBTrk5_kYOKh86Dzqo', token);
-      // Redirect ke halaman dashboard
-      window.location.href = '/dashboard';
+      localStorage.setItem('token', token);
+      toast.success("Welcome to ObjectDetection!")
+      
+      setTimeout(() => {
+        window.location.href = '/dashboard';
+      }, 2000);
     } catch (error) {
+      toast.error("Email or password is wrong!");
+      toast.info("Please try again")
       console.error(error);
     }
   };
 
   return (
-    <Flex position="relative" mb="40px">
-      <Flex
-        h={{ sm: "initial", md: "75vh", lg: "85vh" }}
-        w="100%"
-        maxW="1044px"
-        mx="auto"
-        justifyContent="center"
-        b="50%"
-        alignItems="center"
-        textAlign="center"
-      >
-        <Box
-          position="absolute"
-          bg="#fff"
-          p={4}
-          color="black"
-          style={boxStyle}
-          top="50%"
-          left="50%"
-          transform="translate(-50%, -50%)"
+    <>
+      <Flex position="relative" mb="40px">
+        <Flex
+          h={{ sm: "initial", md: "75vh", lg: "85vh" }}
+          w="100%"
+          maxW="1044px"
+          mx="auto"
+          justifyContent="center"
+          b="50%"
+          alignItems="center"
+          textAlign="center"
         >
-          <Heading
-            position="relative"
-            top="33px"
-            mb="10px"
-            display="flex"
-            justifyContent="center"
+          <Box
+            position="absolute"
+            bg="#fff"
+            p={4}
+            color="black"
+            style={boxStyle}
+            top="50%"
+            left="50%"
+            transform="translate(-50%, -50%)"
           >
-            <img src={shield2} alt="shield2" w="46px" h="46px" style={shieldStyle}></img>
-            <img src={OBJ} alt="OBJ" w="46px" h="46px" style={OBJStyle}></img>
-          </Heading>
-          <FormControl>
-            <FormLabel
+            <Heading
               position="relative"
-              w="54.86px"
-              h="25.71px"
-              left="42px"
-              top="102px"
-              fontSize="18px"
-              fontWeight="700"
+              top="33px"
+              mb="10px"
+              display="flex"
+              justifyContent="center"
             >
-              Email
-            </FormLabel>
+              <img src={shield2} alt="shield2" w="46px" h="46px" style={shieldStyle}></img>
+              <img src={OBJ} alt="OBJ" w="46px" h="46px" style={OBJStyle}></img>
+            </Heading>
+            <FormControl>
+              <FormLabel
+                position="relative"
+                w="54.86px"
+                h="25.71px"
+                left="42px"
+                top="102px"
+                fontSize="18px"
+                fontWeight="700"
+              >
+                Email
+              </FormLabel>
 
-            <Input
-              style={inputStyle}
-              top="90px"
-              mb="24px"
-              fontSize="sm"
-              type="text"
-              size="lg"
-              value={email} onChange={(e) => setEmail(e.target.value)}
-            />
-            <FormLabel
-              position="relative"
-              w="99.43px"
-              h="25.71px"
-              left="42px"
-              top="102px"
-              fontSize="18px"
-              fontWeight="700"
-            >
-              Password
-            </FormLabel>
-            <Input
-              style={inputStyle}
-              top="90px"
-              mb="36px"
-              fontSize="sm"
-              type="password"
-              size="lg"
-              value={password} onChange={(e) => setPassword(e.target.value)}
-            />
+              <Input
+                style={inputStyle}
+                top="90px"
+                mb="24px"
+                fontSize="sm"
+                type="text"
+                size="lg"
+                value={email} onChange={(e) => setEmail(e.target.value)}
+              />
+              <FormLabel
+                position="relative"
+                w="99.43px"
+                h="25.71px"
+                left="42px"
+                top="102px"
+                fontSize="18px"
+                fontWeight="700"
+              >
+                Password
+              </FormLabel>
+              <Input
+                style={inputStyle}
+                top="90px"
+                mb="36px"
+                fontSize="sm"
+                type="password"
+                size="lg"
+                value={password} onChange={(e) => setPassword(e.target.value)}
+              />
 
-            <Button
-              fontSize="18px"
-              type="submit"
-              bg="linear-gradient(89.95deg, #00DC7F -1.21%, #00A861 99.96%)"
-              w="480px"
-              h="56.57px"
-              mb="50.43px"
-              color="white"
-              top="129px"
-              _hover={{
-                bg: "teal.200",
-              }}
-              _active={{
-                bg: "teal.400",
-              }}
-              onClick={() => {
-                window.location.href = `/dashboard`;
-              }}
-              onSubmit={handleLogin}
-            >
-              Sign In
-            </Button>
-          </FormControl>
-        </Box>
+              <Button
+                fontSize="18px"
+                type="submit"
+                bg="linear-gradient(89.95deg, #00DC7F -1.21%, #00A861 99.96%)"
+                w="480px"
+                h="56.57px"
+                mb="50.43px"
+                color="white"
+                top="129px"
+                _hover={{
+                  bg: "teal.200",
+                }}
+                _active={{
+                  bg: "teal.400",
+                }}
+                onClick={handleLogin}
+              >
+                Sign In
+              </Button>
+            </FormControl>
+          </Box>
+        </Flex>
       </Flex>
-    </Flex>
+    </>
   );
 }
 
