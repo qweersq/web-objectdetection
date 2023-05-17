@@ -42,6 +42,10 @@ function SignIn() {
       console.log(token)
       // Simpan token dalam local storage
       localStorage.setItem('token', token);
+
+      // add data user to local storage from response data
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+
       toast.success("Welcome to ObjectDetection!")
       
       setTimeout(() => {

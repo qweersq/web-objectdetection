@@ -92,8 +92,6 @@ export default function Dashboard(props) {
 
   const isAuthenticated = localStorage.getItem("token");
 
-  const { count, setCount } = useState(0);
-
   // validate token to access dashboard and redirect to login if not authenticated
   const PrivateRoute = ({ component: Component, ...rest }) => (
     isAuthenticated ? (
