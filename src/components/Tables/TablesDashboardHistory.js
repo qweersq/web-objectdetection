@@ -7,8 +7,13 @@ import {
   Text,
   Tr,
   useColorModeValue,
+  Tbody,
 } from "@chakra-ui/react";
 import React from "react";
+import axios from "axios";
+import { useEffect } from "react";
+import { useState } from "react";
+import moment from "moment";
 
 function TablesDashboardHistory(props) {
   const { tanggal, sensor, jenis, jam } = props;
@@ -16,42 +21,64 @@ function TablesDashboardHistory(props) {
   const bgStatus = useColorModeValue("gray.400", "#1a202c");
   const colorStatus = useColorModeValue("white", "gray.400");
 
+  const [historyData, setHistoryData] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/api/history', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      const historyData = response.data;
+      setHistoryData(historyData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
-    <Tr>
-      <Flex justifyContent="center">
-        <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-          {tanggal}
-        </Text>
-      </Flex>
-      <Flex align="center" justifyContent="space-between" justifyItems="center">
-        <Td minWidth={{ sm: "120px" }} pl="0px">
-          <Flex align="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
-            {/* <Avatar src={logo} w="50px" borderRadius="12px" me="18px" /> */}
-
-            <Flex direction="column">
-              <Text
-                fontSize="md"
-                color={textColor}
-                fontWeight="bold"
-                minWidth="100%"
-              >
-                {sensor}
-              </Text>
-              <Text fontSize="sm" color={textColor} fontWeight="normal">
-                {jenis}
-              </Text>
-            </Flex>
-          </Flex>
-
-        </Td>
-        <Td>
+    <Tbody>
+      {historyData.map((history) => (
+        <Tr>
+        <Flex justifyContent="center">
           <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-            {jam}
+            {moment (history.date).format("DD MMMM YYYY")}
           </Text>
-        </Td>
-      </Flex>
-    </Tr>
-
+        </Flex>
+        <Flex align="center" justifyContent="space-between" justifyItems="center">
+          <Td minWidth={{ sm: "120px" }} pl="0px">
+            <Flex align="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
+              {/* <Avatar src={logo} w="50px" borderRadius="12px" me="18px" /> */}
+  
+              <Flex direction="column">
+                <Text
+                  fontSize="md"
+                  color={textColor}
+                  fontWeight="bold"
+                  minWidth="100%"
+                >
+                  {history.name}
+                </Text>
+                <Text fontSize="sm" color={textColor} fontWeight="normal">
+                  {history.description}
+                </Text>
+              </Flex>
+            </Flex>
+  
+          </Td>
+          <Td>
+            <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
+              {moment(history.date).format("HH:mm")}
+            </Text>
+          </Td>
+        </Flex>
+      </Tr>
+      ))}
+    </Tbody>
   );
 }
 

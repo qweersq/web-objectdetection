@@ -27,18 +27,7 @@ import {
         </CardHeader>
         <CardBody>
           <Table variant='simple' color={textColor}>
-            <Tbody>
-              {data.map((row) => {
-                return (
-                  <TablesDashboardHistory
-                    sensor={row.sensor}
-                    jenis={row.jenis}
-                    tanggal={row.tanggal}
-                    jam={row.jam}
-                  />
-                );
-              })}
-            </Tbody>
+              <TablesDashboardHistory/>
           </Table>
         </CardBody>
       </Card>

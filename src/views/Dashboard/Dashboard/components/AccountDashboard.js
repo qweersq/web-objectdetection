@@ -14,17 +14,19 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import TablesTableRow from "components/Tables/TablesTableRow";
+import axios from "axios";
+import { useState } from "react";
 import React from "react";
 
 const AccountDashboard = ({ title, captions, data }) => {
   const textColor = useColorModeValue("gray.700", "white");
   return (
     <Card boxShadow="md">
-        <CardHeader p='6px 0px 22px 0px'>
-          <Text fontSize='xl' color={textColor} fontWeight='bold' >
-            {title}
-          </Text>
-        </CardHeader>
+      <CardHeader p='6px 0px 22px 0px'>
+        <Text fontSize='xl' color={textColor} fontWeight='bold' >
+          {title}
+        </Text>
+      </CardHeader>
       <TableContainer>
         <CardBody>
           <Table variant='simple' color={textColor}>
@@ -39,25 +41,10 @@ const AccountDashboard = ({ title, captions, data }) => {
                 })}
               </Tr> */}
             </Thead>
-            <Tbody>
-              {data.map((row) => {
-                return (
-                  <TablesTableRow
-                    key={`${row.email}-${row.name}`}
-                    name={row.name}
-                    logo={row.logo}
-                    email={row.email}
-                    subdomain={row.subdomain}
-                    domain={row.domain}
-                    status={row.status}
-                    date={row.date}
-                  />
-                );
-              })}
-            </Tbody>
+                  <TablesTableRow/>
           </Table>
         </CardBody>
-      </TableContainer> 
+      </TableContainer>
     </Card>
   );
 };

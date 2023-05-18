@@ -41,6 +41,8 @@ import Card from "components/Card/Card";
 import { tablesTableData, historyData } from "variables/general";
 import HistoryDashboard from "./components/HistoryDashboard";
 import Maps from "./components/Maps";
+import axios from "axios";
+import { useEffect } from "react";
 
 
 
@@ -51,7 +53,25 @@ export default function Dashboard() {
   const [isOn, setIsOn] = useState(true);
   const textColor = useColorModeValue("gray.700", "white");
 
+  const [fromTime, setFromTime] = useState(null);
+  const [toTime, setToTime] = useState(null);
 
+  const handleSave = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/api/sensors', {
+        from_time: fromTime,
+        to_time: toTime,
+      });
+
+      console.log(response.data); // Menampilkan respons dari server (opsional)
+
+      // Reset nilai dari TimePicker setelah berhasil disimpan
+      setFromTime(null);
+      setToTime(null);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const toggleButton = () => {
     setIsOn(!isOn);
@@ -59,52 +79,93 @@ export default function Dashboard() {
 
   const buttonBg = isOn ? '#00DC7F' : '#FF4D4F';
 
+  const [sensorData, setSensorData] = useState([]);
+
+  useEffect(() => {
+    fetchDataSensor();
+  }, []);
+
+  const fetchDataSensor = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/api/sensor', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      const sensorData = response.data;
+      setSensorData(sensorData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const sensorCount = sensorData.length;
+
 
   return (
     <>
       <Grid templateColumns="repeat(2, 1fr)" gap={2} pt={{ base: "120px", md: "75px" }}>
-          <Card p={4} color="black" borderRadius="lg" boxShadow="md" width="100%">
+        <Card p={4} color="black" borderRadius="lg" boxShadow="md" width="100%">
+          <Flex justifyContent="space-between" alignItems="center">
+            <Text fontSize="xl" fontWeight="bold" color={textColor}> Alarm Sensor</Text>
             <Flex justifyContent="space-between" alignItems="center">
-              <Text fontSize="xl" fontWeight="bold" color={textColor}> Alarm Sensor</Text>
-              <Flex justifyContent="space-between" alignItems="center">
-                <TimePicker format="HH:mm" style={pickerStyle} className="custom-time-picker" />
-                <Divider
-                  width="10px" borderWidth="2px" borderColor={textColor} borderRadius="3px" pl="3px"
-                />
-                <TimePicker format="HH:mm" style={pickerStyle} className="custom-time-picker" />
-              </Flex>
+              <TimePicker
+                format="HH:mm"
+                style={pickerStyle}
+                className="custom-time-picker"
+                value={fromTime}
+                onChange={(time) => setFromTime(time)}
+              />
+              <Divider width="10px" borderWidth="2px" borderColor={textColor} borderRadius="3px" pl="3px" />
+              <TimePicker
+                format="HH:mm"
+                style={pickerStyle}
+                className="custom-time-picker"
+                value={toTime}
+                onChange={(time) => setToTime(time)}
+              />
               <Button
                 bg={buttonBg}
                 _hover={{ bg: isOn ? '#42ffaf' : '#FF7875' }}
                 color="white"
                 borderRadius="lg"
-                onClick={toggleButton}
-                width="77px"
+                width="58px"
                 height="29px"
+                onClick={handleSave}
               >
-                {isOn ? 'On' : 'Off'}
+                Save
               </Button>
             </Flex>
-          </Card>
-          <Card p={4} color="black" borderRadius="lg" boxShadow="md" width="100%">
-            <Flex justifyContent="space-between" alignItems="center" pt="14px">
-              <Image src={Bell}></Image>
-              <Text fontSize="xl" fontWeight="bold" color={textColor}> 124 </Text>
-              <Text fontSize="lg" mr="250px" color={textColor}> Sensor Point </Text>
-              <Button bg="#00DC7F" color="white" _hover="none" width="77px" height="29px" borderRadius="lg" _active="none">
-                Active
-              </Button>
-            </Flex>
-          </Card>
-          <AccountDashboard
-            title={"Account"}
-            // captions={["Author", "Function", "Status", "Employed", ""]}
-            data={tablesTableData}
-          />
-          <HistoryDashboard
-            title={"History"}
-            data={historyData}
-          />
+            <Button
+              bg={buttonBg}
+              _hover={{ bg: isOn ? '#42ffaf' : '#FF7875' }}
+              color="white"
+              borderRadius="lg"
+              onClick={toggleButton}
+              width="77px"
+              height="29px"
+            >
+              {isOn ? 'On' : 'Off'}
+            </Button>
+          </Flex>
+        </Card>
+        <Card p={4} color="black" borderRadius="lg" boxShadow="md" justifyContent="center" width="100%">
+          <Flex justifyContent="space-between" alignItems="center">
+            <Image src={Bell}></Image>
+            <Text fontSize="xl" fontWeight="bold" color={textColor}> {sensorCount} </Text>
+            <Text fontSize="lg" mr="250px" color={textColor}> Sensor Point </Text>
+            <Button bg="#00DC7F" color="white" _hover="none" width="77px" height="29px" borderRadius="lg" _active="none">
+              Active
+            </Button>
+          </Flex>
+        </Card>
+        <AccountDashboard
+          title={"Account"}
+        // captions={["Author", "Function", "Status", "Employed", ""]}
+        />
+        <HistoryDashboard
+          title={"History"}
+          data={historyData}
+        />
       </Grid >
       <Grid pt={{ base: "120px", md: "10px" }}>
         <Maps />
