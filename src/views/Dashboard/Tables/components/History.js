@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
 import {
   Table,
   Tbody,
@@ -9,29 +7,15 @@ import {
   Tr,
   useColorModeValue,
 } from "@chakra-ui/react";
+// Custom components
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import TablesHistory from "components/Tables/TablesHistory";
-import TablesTableRow from "components/Tables/TablesTableRow";
+import React from "react";
 
-const History = ({ title, captions }) => {
+const History = ({ title, captions, data }) => {
   const textColor = useColorModeValue("gray.700", "white");
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get("http://localhost:3000/api/history");
-      setData(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return (
     <Card overflowX={{ sm: "scroll", xl: "hidden" }}>
       <CardHeader p="6px 0px 22px 0px">
@@ -52,20 +36,7 @@ const History = ({ title, captions }) => {
               })}
             </Tr>
           </Thead>
-          <Tbody>
-            {data.map((row) => {
-              return (
-                <TablesHistory
-                  sensor={row.sensor}
-                  security={row.security}
-                  jenis={row.jenis}
-                  status={row.status}
-                  jam={row.jam}
-                  tanggal={row.tanggal}
-                />
-              );
-            })}
-          </Tbody>
+            <TablesHistory />
         </Table>
       </CardBody>
     </Card>

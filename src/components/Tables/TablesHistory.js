@@ -14,87 +14,114 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
+  Tbody,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import { Card } from "antd";
+import axios from "axios";
+import moment from "moment";
 
-function TablesHistory(props) {
-  const { tanggal, sensor, jenis, jam, security, status } = props;
+function TablesHistory() {
   const textColor = useColorModeValue("gray.700", "white");
   const bgStatus = useColorModeValue("gray.400", "#1a202c");
   const colorStatus = useColorModeValue("white", "gray.400");
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isLoading, setIsLoading] = useState(true);
+  const [historyData, setHistoryData] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/api/history", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const historyData = response.data;
+      setHistoryData(historyData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
-    <Tr>
-      <Td minWidth={{ sm: "120px" }} pl="0px">
-        <Text fontSize="md" color={textColor} fontWeight="bold" minWidth="100%">
-          {sensor}
-        </Text>
-      </Td>
-      <Td>
-        <Text fontSize="md" color={textColor} fontWeight="light" pb=".5rem">
-          {security}
-        </Text>
-      </Td>
-
-      <Td>
-        <Text fontSize="md" color={textColor} fontWeight="light" pb=".5rem">
-          {jenis}
-        </Text>
-      </Td>
-
-      <Td>
-        <Badge
-          bg={status === "Aman" ? "green.400" : "red.500"}
-          color="white"
-          fontSize="16px"
-          p="3px 10px"
-          borderRadius="8px"
-        >
-          {status}
-        </Badge>
-      </Td>
-      <Td>
-        <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-          {jam}
-        </Text>
-      </Td>
-      <Td>
-        <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-          {tanggal}
-        </Text>
-      </Td>
-      <Td>
-        <Button
-          bg="#00DC7F"
-          color="white"
-          _hover={{ bg: "#00d179" }}
-          width="100px"
-          height="32px"
-          borderRadius="lg"
-          onClick={onOpen}
-        >
-          Lihat Photo
-        </Button>
-        <Modal isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader color="green.400">Photo</ModalHeader>
-            <ModalBody >
-              <Card maxW="400px" maxH="812px" justifyContent="center">
-              <img src="https://cdn.discordapp.com/attachments/974200919749193758/1103565279386152980/newdamkar.png" alt="gambar"/>
-              </Card>
-            </ModalBody>
-            <ModalCloseButton />
-            <ModalFooter>
-              
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
-      </Td>
-    </Tr>
+    <Tbody>
+      {historyData.map((history) => (
+        <Tr key={history.id}>
+          <Td minWidth={{ sm: "120px" }} pl="0px">
+            <Text
+              fontSize="md"
+              color={textColor}
+              fontWeight="bold"
+              minWidth="100%"
+            >
+              {history.name}
+            </Text>
+          </Td>
+          <Td>
+            <Text fontSize="md" color={textColor} fontWeight="light" pb=".5rem">
+              {history.user_id}
+            </Text>
+          </Td>
+          <Td>
+            <Text fontSize="md" color={textColor} fontWeight="light" pb=".5rem">
+              {history.description}
+            </Text>
+          </Td>
+          <Td>
+            <Badge
+              bg={history.status === "aman" ? "green.400" : "red.500"}
+              color="white"
+              fontSize="16px"
+              p="3px 10px"
+              borderRadius="8px"
+            >
+              {history.status}
+            </Badge>
+          </Td>
+          <Td>
+            <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
+              {moment(history.date).format("HH:mm")}
+            </Text>
+          </Td>
+          <Td>
+            <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
+              {moment(history.date).format("DD MM YYYY")}
+            </Text>
+          </Td>
+          <Td>
+            <Button
+              bg="#00DC7F"
+              color="white"
+              _hover={{ bg: "#00d179" }}
+              width="100px"
+              height="32px"
+              borderRadius="lg"
+              onClick={onOpen}
+            >
+              Lihat Photo
+            </Button>
+            <Modal isOpen={isOpen} onClose={onClose}>
+              <ModalOverlay />
+              <ModalContent>
+                <ModalHeader color="green.400">Photo</ModalHeader>
+                <ModalBody>
+                  <Card maxW="400px" maxH="812px" justifyContent="center">
+                    {history.photo_url}
+                  </Card>
+                </ModalBody>
+                <ModalCloseButton />
+                <ModalFooter></ModalFooter>
+              </ModalContent>
+            </Modal>
+          </Td>
+        </Tr>
+      ))}
+    </Tbody>
   );
 }
 
