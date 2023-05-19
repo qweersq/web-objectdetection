@@ -31,15 +31,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 export function SidebarLocation() {
-    function validateName(value) {
-        let error
-        if (!value) {
-            error = "Name is required"
-        } else if (value.toLowerCase() !== "naruto") {
-            error = "Jeez! You're not a fan 😱"
-        }
-        return error
-    }
 
     const textColor = useColorModeValue("gray.700", "white");
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -47,6 +38,34 @@ export function SidebarLocation() {
 
     const [userDataStorage, setUserDataStorage] = useState(JSON.parse(localStorage.getItem('user')));
     const [allBranch, setAllBranch] = useState([]);
+    const [name, setName] = useState('');
+    const [location, setLocation] = useState('');
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            await axios.post('http://localhost:3000/api/branch', { name: name, location: location }, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            });
+            toast.success("Location created successfully!")
+            setTimeout(() => {
+                window.location.href = '/dashboard';
+            }, 2000);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const handleNameChange = (event) => {
+        setName(event.target.value);
+    }
+
+    const handleLocationChange = (event) => {
+        setLocation(event.target.value);
+    }
+
 
     const handleLocation = async () => {
         console.log(userDataStorage)
@@ -99,6 +118,7 @@ export function SidebarLocation() {
             console.error(error);
         }
     }
+
 
     return (
         <>
@@ -155,31 +175,16 @@ export function SidebarLocation() {
                             <ModalHeader> Create Location</ModalHeader>
                             <ModalCloseButton />
                             <ModalBody>
-                                <Formik initialValues={{ name: "Sasuke" }} onSubmit={(values, actions) => {
-                                    setTimeout(() => {
-                                        alert(JSON.stringify(values, null, 2))
-                                        actions.setSubmitting(false)
-                                    }, 1000)
-                                }}>
-                                    {(props) => (
-                                        <Form>
-                                            <Field name="name" validate={validateName}>
-                                                {({ field, form }) => (
-                                                    <FormControl isInvalid={form.errors.name && form.touched.name}>
-                                                        <FormLabel htmlFor="name">Nama</FormLabel>
-                                                        <Input id="name" placeholder="Nama" />
-                                                        <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-                                                        <FormLabel htmlFor="name" mt={4}>Location</FormLabel>
-                                                        <Input id="name" placeholder="Location" />
-                                                        <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-                                                    </FormControl>
-                                                )}
-                                            </Field>
-                                            <Button mt={4} colorScheme="teal" isLoading={props.isSubmitting} type="submit" bg="#00A861" _hover={{ bg: "#00d179" }} color={"white"} w="100%">
-                                                Create
-                                            </Button>
-                                        </Form>
-                                    )}
+                                <Formik>
+                                    <Form onSubmit={handleSubmit}>
+                                            <FormLabel htmlFor="name">Nama</FormLabel>
+                                            <Input id="name" placeholder="Nama" value={name} onChange={handleNameChange} />
+                                            <FormLabel htmlFor="name" mt={4}>Location</FormLabel>
+                                            <Input id="name" placeholder="Location" value={location} onChange={handleLocationChange} />
+                                        <Button mt={4} colorScheme="teal" type="submit" bg="#00A861" _hover={{ bg: "#00d179" }} color={"white"} w="100%">
+                                            Create
+                                        </Button>
+                                    </Form>
                                 </Formik>
                             </ModalBody>
                             <ModalFooter>
