@@ -23,7 +23,7 @@ import CardHeader from "components/Card/CardHeader";
 import React, { useEffect } from "react";
 import { Formik, Form, Field } from "formik";
 import { useDisclosure } from "@chakra-ui/react";
-import axios from "axios";
+import axios, { all } from "axios";
 import { useState } from "react";
 import apiUserData from "../../service/apiUserData";
 import { toast } from "react-toastify";
@@ -119,6 +119,15 @@ export function SidebarLocation() {
         }
     }
 
+    const branchName = (branchId) => {
+        const branch = allBranch.find(branch => branch.id === branchId);
+        return branch?.name;
+    }
+
+    const branchLocation = (branchId) => {
+        const branch = allBranch.find(branch => branch.id === branchId);
+        return branch?.location;
+    }
 
     return (
         <>
@@ -126,10 +135,10 @@ export function SidebarLocation() {
                 <CardHeader p="12px 5px" mb="12px">
                     <Flex justify="space-between" align="flex-start" flexDirection="column" minHeight="30px" w="100%">
                         <Text fontSize="sm" color={textColor} fontWeight="bold">
-                            Jhon Doo
+                            {branchName(userDataStorage.branch_id)}
                         </Text>
                         <Text fontSize="sm" color={textColor} fontWeight="light">
-                            Binus @malang
+                            {branchLocation(userDataStorage.branch_id)}
                         </Text>
                     </Flex>
                 </CardHeader>
