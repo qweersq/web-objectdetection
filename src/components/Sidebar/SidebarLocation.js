@@ -104,12 +104,14 @@ export function SidebarLocation() {
     const handleChangeBranch = async (branchId) => {
         // update data user with branch id to api
         try {
-            await axios.put(`http://localhost:3000/api/account/${userDataStorage.id}`, { branch_id: branchId }, {
+            const response = await axios.put(`http://localhost:3000/api/account/${userDataStorage.id}`, { branch_id: branchId }, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
             });
-            apiUserData(userDataStorage.id);
+            console.log(response.data)
+            localStorage.setItem('user', JSON.stringify(response.data.user));
+            localStorage.setItem('token', response.data.token);
             toast.success("Location changed successfully!")
             setTimeout(() => {
                 window.location.href = '/dashboard';

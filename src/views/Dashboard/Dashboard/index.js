@@ -60,6 +60,11 @@ export default function Dashboard() {
   const handleSave = async () => {
     try {
       // Menggunakan Moment.js untuk memformat nilai waktu menjadi jam dan menit
+      await axios.put(`http://localhost:3000/api/account/${userDataStorage.id}`, { branch_id: branchId }, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+    });
       const formattedFromTime = moment(fromTime).format('HH:mm');
       const formattedToTime = moment(toTime).format('HH:mm');
   

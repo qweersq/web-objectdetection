@@ -7,8 +7,10 @@ const apiUserData = async (id) => {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             }
         });
+        console.log(response)
         // set to local storage
         localStorage.setItem('user', JSON.stringify(response.data));
+        localStorage.setItem('token', JSON.stringify(response.data.token));
         return response.data;
     } catch (error) {
         console.error(error);
