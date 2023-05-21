@@ -78,7 +78,7 @@ function TableSensor(props) {
                     <Modal isOpen={isOpen} onClose={onClose} isCentered>
                         <ModalOverlay />
                         <ModalContent maxW="56rem" minW="24.375rem" maxh="482px">
-                            <ModalHeader color="green.400">Edit Sensor</ModalHeader>
+                            <ModalHeader color="green.400">Edit Sensor {sensor}</ModalHeader>
                             <ModalCloseButton />
                             <ModalBody>
                                 <Flex justifyContent="space-between">
