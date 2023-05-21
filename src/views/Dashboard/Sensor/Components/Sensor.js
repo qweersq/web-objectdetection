@@ -37,11 +37,11 @@ const Sensor = ({ title, captions, data }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const textColor = useColorModeValue("gray.700", "white");
     const [sensorData, setSensorData] = useState({
-        Id: "",
+        id: "",
         latitude: "",
         longitude: "",
         status: false,
-        branch_id: 1,
+        
       });
       const handleInputChange = (event) => {
         const { id, value } = event.target;
@@ -98,8 +98,8 @@ const Sensor = ({ title, captions, data }) => {
                             <Flex justifyContent="space-between">
                                 <Flex flexDirection="column" width="100%">
                                     <FormControl>
-                                    <FormLabel htmlFor="Id">Sensor ID</FormLabel>
-                                    <Input id="Id" placeholder="Sensor ID" value={sensorData.id}onChange={handleInputChange}/>
+                                    <FormLabel htmlFor="id">Sensor ID</FormLabel>
+                                    <Input id="id" placeholder="Sensor ID" value={sensorData.id}onChange={handleInputChange}/>
                                     <FormLabel htmlFor="latitude" mt={4}>Latitude</FormLabel>
                                     <Input id="latitude" placeholder="Latitude" value={sensorData.latitude} onChange={handleInputChange}/>
                                     <FormLabel htmlFor="longitude" mt={4}>Longitude</FormLabel>
