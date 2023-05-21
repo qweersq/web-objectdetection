@@ -23,7 +23,7 @@ import CardHeader from "components/Card/CardHeader";
 import React, { useEffect } from "react";
 import { Formik, Form, Field } from "formik";
 import { useDisclosure } from "@chakra-ui/react";
-import axios from "axios";
+import axios, { all } from "axios";
 import { useState } from "react";
 import apiUserData from "../../service/apiUserData";
 import { toast } from "react-toastify";
@@ -104,12 +104,14 @@ export function SidebarLocation() {
     const handleChangeBranch = async (branchId) => {
         // update data user with branch id to api
         try {
-            await axios.put(`http://localhost:3000/api/account/${userDataStorage.id}`, { branch_id: branchId }, {
+            const response = await axios.put(`http://localhost:3000/api/account/${userDataStorage.id}`, { branch_id: branchId }, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
             });
-            apiUserData(userDataStorage.id);
+            console.log(response.data)
+            localStorage.setItem('user', JSON.stringify(response.data.user));
+            localStorage.setItem('token', response.data.token);
             toast.success("Location changed successfully!")
             setTimeout(() => {
                 window.location.href = '/dashboard';
@@ -119,6 +121,15 @@ export function SidebarLocation() {
         }
     }
 
+    const branchName = (branchId) => {
+        const branch = allBranch.find(branch => branch.id === branchId);
+        return branch?.name;
+    }
+
+    const branchLocation = (branchId) => {
+        const branch = allBranch.find(branch => branch.id === branchId);
+        return branch?.location;
+    }
 
     return (
         <>
@@ -126,10 +137,10 @@ export function SidebarLocation() {
                 <CardHeader p="12px 5px" mb="12px">
                     <Flex justify="space-between" align="flex-start" flexDirection="column" minHeight="30px" w="100%">
                         <Text fontSize="sm" color={textColor} fontWeight="bold">
-                            Jhon Doo
+                            {branchName(userDataStorage.branch_id)}
                         </Text>
                         <Text fontSize="sm" color={textColor} fontWeight="light">
-                            Binus @malang
+                            {branchLocation(userDataStorage.branch_id)}
                         </Text>
                     </Flex>
                 </CardHeader>

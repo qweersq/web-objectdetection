@@ -43,6 +43,7 @@ import HistoryDashboard from "./components/HistoryDashboard";
 import Maps from "./components/Maps";
 import axios from "axios";
 import { useEffect } from "react";
+import moment from 'moment';
 
 
 
@@ -58,13 +59,22 @@ export default function Dashboard() {
 
   const handleSave = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/api/sensors', {
-        from_time: fromTime,
-        to_time: toTime,
+      // Menggunakan Moment.js untuk memformat nilai waktu menjadi jam dan menit
+      await axios.put(`http://localhost:3000/api/account/${userDataStorage.id}`, { branch_id: branchId }, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+    });
+      const formattedFromTime = moment(fromTime).format('HH:mm');
+      const formattedToTime = moment(toTime).format('HH:mm');
+  
+      const response = await axios.put('http://localhost:3000/api/times-sensor', {
+        from_time: formattedFromTime,
+        to_time: formattedToTime,
       });
-
+  
       console.log(response.data); // Menampilkan respons dari server (opsional)
-
+  
       // Reset nilai dari TimePicker setelah berhasil disimpan
       setFromTime(null);
       setToTime(null);
@@ -72,6 +82,7 @@ export default function Dashboard() {
       console.error(error);
     }
   };
+  
 
   const toggleButton = () => {
     setIsOn(!isOn);
