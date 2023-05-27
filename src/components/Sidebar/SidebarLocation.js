@@ -28,6 +28,7 @@ import { useState } from "react";
 import apiUserData from "../../service/apiUserData";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { API_URL } from "constant/data";
 
 
 export function SidebarLocation() {
@@ -35,16 +36,32 @@ export function SidebarLocation() {
     const textColor = useColorModeValue("gray.700", "white");
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { isOpen: isOpen2, onOpen: onOpen2, onClose: onClose2 } = useDisclosure();
-
     const [userDataStorage, setUserDataStorage] = useState(JSON.parse(localStorage.getItem('user')));
     const [allBranch, setAllBranch] = useState([]);
+    const [currentBranch, setCurrentBranch] = useState({});
     const [name, setName] = useState('');
     const [location, setLocation] = useState('');
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`${API_URL}/api/branch/${userDataStorage.branch_id}`, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+                setCurrentBranch(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        fetchData();
+    }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await axios.post('http://localhost:3000/api/branch', { name: name, location: location }, {
+            await axios.post(`${API_URL}/api/branch`, { name: name, location: location }, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
@@ -68,7 +85,6 @@ export function SidebarLocation() {
 
 
     const handleLocation = async () => {
-        console.log(userDataStorage)
         // get branch id from user local storage
         onOpen2();
 
@@ -76,7 +92,7 @@ export function SidebarLocation() {
         if (userDataStorage.role === "superadmin") {
             try {
                 // fetch api with header token to get all branch
-                const response = await axios.get('http://localhost:3000/api/branch', {
+                const response = await axios.get(`${API_URL}/api/branch`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
@@ -89,7 +105,7 @@ export function SidebarLocation() {
             // if user is admin, can get branch with id
             try {
                 // fetch api with header token to get all branch
-                const response = await axios.get(`http://localhost:3000/api/branch/${userDataStorage.branch_id}`, {
+                const response = await axios.get(`${API_URL}/api/branch/${userDataStorage.branch_id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
@@ -104,7 +120,7 @@ export function SidebarLocation() {
     const handleChangeBranch = async (branchId) => {
         // update data user with branch id to api
         try {
-            const response = await axios.put(`http://localhost:3000/api/account/${userDataStorage.id}`, { branch_id: branchId }, {
+            const response = await axios.put(`${API_URL}/api/account/${userDataStorage.id}`, { branch_id: branchId }, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
@@ -137,15 +153,15 @@ export function SidebarLocation() {
                 <CardHeader p="12px 5px" mb="12px">
                     <Flex justify="space-between" align="flex-start" flexDirection="column" minHeight="30px" w="100%">
                         <Text fontSize="sm" color={textColor} fontWeight="bold">
-                            {branchName(userDataStorage.branch_id)}
+                            {currentBranch.name || "Branch Name"}
                         </Text>
                         <Text fontSize="sm" color={textColor} fontWeight="light">
-                            {branchLocation(userDataStorage.branch_id)}
+                            {currentBranch.location || "Location"}
                         </Text>
                     </Flex>
                 </CardHeader>
                 <Flex justify="space-between" align="" flexDirection="column" minHeight="30px" w="100%">
-                    <Button bg="#00A861" _hover={{ bg: "#00d179" }} size="xs" color={"white"} onClick={handleLocation}>Open Modal</Button>
+                    <Button bg="#00A861" _hover={{ bg: "#00d179" }} size="xs" color={"white"} onClick={handleLocation}>Change Location</Button>
                     <Modal onClose={onClose2} isOpen={isOpen2} isCentered>
                         <ModalOverlay />
                         <ModalContent maxW="56rem" w="90%">

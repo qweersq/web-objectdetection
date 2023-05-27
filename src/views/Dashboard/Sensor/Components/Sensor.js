@@ -32,6 +32,7 @@ import { useState } from "react";
 import axios from "axios";
 import React from "react";
 import { useDisclosure } from "@chakra-ui/react";
+import { API_URL } from "constant/data";
 
 const Sensor = ({ title, captions, data }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -67,7 +68,7 @@ const Sensor = ({ title, captions, data }) => {
           },
         };
         // Make a POST request to the API
-    axios.post("http://localhost:3000/api/sensor", sensorData, config)
+    axios.post(`${API_URL}/api/sensor`, sensorData, config)
     .then((response) => {
       // Handle success
       console.log(response.data);
@@ -139,7 +140,7 @@ const Sensor = ({ title, captions, data }) => {
                         {data.map((row) => {
                             return (
                                 <TablesHistory
-                                    sensor={row.sensor}
+                                    sensor={`Sensor#${row.id}`}
                                     latitude={row.latitude}
                                     longtitude={row.longitude}
                                     status={row.status}

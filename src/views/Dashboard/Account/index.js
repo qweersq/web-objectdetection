@@ -1,37 +1,37 @@
 import { Flex, Heading, StylesProvider } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
-import Sensor from "./Components/Sensor";
+import React, { useEffect } from "react";
+import Account from "./components/Account";
 import { API_URL } from "constant/data";
 import axios from "axios";
 
-
 function Tables() {
-  const [sensorData, setSensorData] = useState([]);
+
+  const [accountData, setAccountData] = React.useState([]);
 
   useEffect(() => {
-    const fetchDataSensor = async () => {
+    const fetchDataAccount = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/sensors/token`, {
+        const response = await axios.get(`${API_URL}/api/accounts/token`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
           }
-        });
+        })
         console.log(response.data);
-        setSensorData(response.data);
+        setAccountData(response.data);
+
       } catch (error) {
         console.error(error);
       }
-    };
-    fetchDataSensor();
+    }
+    fetchDataAccount();
   }, [])
-
 
   return (
     <Flex direction='column' pt={{ base: "120px", md: "75px" }}>
-      <Sensor
-        title={"Sensor"}
-        captions={["Sensor ID", "Latitude", "Longtitude", "Status", "Action"]}
-        data={sensorData} />
+      <Account
+        title={"Account"}
+        captions={["Name", "Email", "Role", "Status", "Action"]}
+        data={accountData} />
     </Flex>
   );
 }

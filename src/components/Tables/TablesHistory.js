@@ -21,6 +21,7 @@ import { useDisclosure } from "@chakra-ui/react";
 import { Card } from "antd";
 import axios from "axios";
 import moment from "moment";
+import { API_URL } from "constant/data";
 
 function TablesHistory() {
   const textColor = useColorModeValue("gray.700", "white");
@@ -36,7 +37,7 @@ function TablesHistory() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/history", {
+      const response = await axios.get(`${API_URL}/api/historys/token`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

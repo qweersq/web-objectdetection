@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 // Chakra imports
 import {
@@ -20,6 +20,7 @@ import OBJ from "assets/img/Object Detection.png";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { API_URL } from "constant/data";
 
 function SignIn() {
   // Chakra color mode
@@ -38,7 +39,7 @@ function SignIn() {
     e.preventDefault();
     toast("Checking ...");
     try {
-      const response = await axios.post('http://localhost:3000/api/login', { email, password });
+      const response = await axios.post(`${API_URL}/api/login`, { email, password });
       const { token } = response.data;
       console.log(token)
       // Simpan token dalam local storage

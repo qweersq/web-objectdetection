@@ -14,22 +14,27 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import moment from "moment";
+import { API_URL } from "constant/data";
 
 function TablesDashboardHistory(props) {
   const { tanggal, sensor, jenis, jam } = props;
   const textColor = useColorModeValue("gray.700", "white");
   const bgStatus = useColorModeValue("gray.400", "#1a202c");
   const colorStatus = useColorModeValue("white", "gray.400");
+  const userDataStorage = JSON.parse(localStorage.getItem("user"));
 
   const [historyData, setHistoryData] = useState([]);
 
   useEffect(() => {
     fetchData();
+    if (historyData.length > 0) {
+      console.log(historyData);
+    }
   }, []);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/historys/token', {
+      const response = await axios.get(`${API_URL}/api/historys/token`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }

@@ -14,6 +14,7 @@ import React from "react";
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
+import { API_URL } from "constant/data";
 
 function TablesTableRow(props) {
   const { name, email, role, status, } = props;
@@ -28,7 +29,7 @@ function TablesTableRow(props) {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/account', {
+      const response = await axios.get(`${API_URL}/api/account`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }

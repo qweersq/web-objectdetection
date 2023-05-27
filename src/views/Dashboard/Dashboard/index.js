@@ -44,9 +44,7 @@ import Maps from "./components/Maps";
 import axios from "axios";
 import { useEffect } from "react";
 import moment from 'moment';
-
-
-
+import { API_URL } from "constant/data";
 
 export default function Dashboard() {
   const iconBoxInside = useColorModeValue("white", "white");
@@ -60,7 +58,7 @@ export default function Dashboard() {
   const handleSave = async () => {
     try {
       // Menggunakan Moment.js untuk memformat nilai waktu menjadi jam dan menit
-      await axios.put(`http://localhost:3000/api/account/${userDataStorage.id}`, { branch_id: branchId }, {
+      await axios.put(`${API_URL}/api/account/${userDataStorage.id}`, { branch_id: branchId }, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
         }
@@ -68,7 +66,7 @@ export default function Dashboard() {
       const formattedFromTime = moment(fromTime).format('HH:mm');
       const formattedToTime = moment(toTime).format('HH:mm');
   
-      const response = await axios.put('http://localhost:3000/api/times-sensor', {
+      const response = await axios.put(`${API_URL}/api/times-sensor`, {
         from_time: formattedFromTime,
         to_time: formattedToTime,
       });
@@ -98,7 +96,7 @@ export default function Dashboard() {
 
   const fetchDataSensor = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/sensor', {
+      const response = await axios.get(`${API_URL}/api/sensor`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }

@@ -1,7 +1,7 @@
 // import
 import Dashboard from "views/Dashboard/Dashboard";
-import Tables from "views/Dashboard/Tables";
-import Billing from "views/Dashboard/Billing";
+import History from "views/Dashboard/History";
+import Account from "views/Dashboard/Account";
 import Profile from "views/Dashboard/Profile";
 import Sensor from "views/Dashboard/Sensor";
 import SignIn from "views/Auth/SignIn.js";
@@ -37,7 +37,7 @@ var dashRoutes = [
     name: "History",
     rtlName: "لوحة القيادة",
     icon: <ClockIcon color="inherit" />,
-    component: Tables,
+    component: History,
     layout: "/admin",
   },
   {
@@ -46,7 +46,7 @@ var dashRoutes = [
     name: "Account",
     rtlName: "لوحة القيادة",
     icon: <PersonIcon color="inherit" />,
-    component: Billing,
+    component: Account,
     layout: "/admin",
   },
   {
