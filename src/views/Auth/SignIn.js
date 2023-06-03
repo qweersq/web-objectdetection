@@ -51,7 +51,7 @@ function SignIn() {
       toast.success("Welcome to ObjectDetection!")
       
       setTimeout(() => {
-        // window.location.href = '/dashboard';
+        window.location.href = '/dashboard';
       }, 2000);
     } catch (error) {
       toast.error("Email or password is wrong!");
