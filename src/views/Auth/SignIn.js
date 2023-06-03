@@ -41,7 +41,7 @@ function SignIn() {
     try {
       const response = await axios.post(`${API_URL}/api/login`, { email, password });
       const { token } = response.data;
-      console.log(token)
+      console.log(response)
       // Simpan token dalam local storage
       localStorage.setItem('token', token);
 
@@ -51,7 +51,7 @@ function SignIn() {
       toast.success("Welcome to ObjectDetection!")
       
       setTimeout(() => {
-        window.location.href = '/dashboard';
+        // window.location.href = '/dashboard';
       }, 2000);
     } catch (error) {
       toast.error("Email or password is wrong!");
