@@ -42,7 +42,6 @@ function TableSensor(props) {
 
     const handleEdit = async () => {
         try {
-            
             const response = await axios.put(
                 `${API_URL}/api/sensor/${id}`,
                 {
