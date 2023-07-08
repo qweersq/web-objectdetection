@@ -28,7 +28,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 function TableSensor(props) {
-    const { id, sensor, latitude, longtitude, status, remove, setRemove, edited, setEdited, status2 } = props;
+    const { id, code, sensor, latitude, longtitude, status, remove, setRemove, edited, setEdited, status2 } = props;
     const textColor = useColorModeValue("gray.700", "white");
     const inputStyle = { border: "1px solid #000", borderRadius: "10px" };
     const bgStatus = useColorModeValue("gray.400", "#1a202c");
@@ -39,12 +39,14 @@ function TableSensor(props) {
     const [editedLatitude, setEditedLatitude] = useState(latitude);
     const [editedStatus, setEditedStatus] = useState(status);
     const [editedStatus2, setEditedStatus2] = useState(status2)
+    const [editedCode, setEditedCode] = useState(code);
 
     const handleEdit = async () => {
         try {
             const response = await axios.put(
                 `${API_URL}/api/sensor/${id}`,
                 {
+                    code: editedCode,
                     longitude: editedLongtitude,
                     latitude: editedLatitude,
                     status: editedStatus2, // Menggunakan editedStatus2 bukan editedStatus
@@ -104,10 +106,14 @@ function TableSensor(props) {
                 </Td>
                 <Td>
                     <Text fontSize="md" color={textColor} fontWeight="light" pb=".5rem">
+                        {code}
+                    </Text>
+                </Td>
+                <Td>
+                    <Text fontSize="md" color={textColor} fontWeight="light" pb=".5rem">
                         {latitude}
                     </Text>
                 </Td>
-
                 <Td>
                     <Text fontSize="md" color={textColor} fontWeight="light" pb=".5rem">
                         {longtitude}
@@ -143,6 +149,8 @@ function TableSensor(props) {
                                 <Flex justifyContent="space-between">
                                     <Flex flexDirection="column" width="100%">
                                         <FormControl>
+                                            <FormLabel htmlFor="name">Code</FormLabel>
+                                            <Input style={inputStyle} id="code" placeholder="Code" value={editedCode} onChange={(e) => setEditedCode(e.target.value)} />
                                             <FormLabel htmlFor="name">Latitude</FormLabel>
                                             <Input style={inputStyle} id="latitude" placeholder="Latitude" value={editedLatitude} onChange={(e) => setEditedLatitude(e.target.value)} />
                                             <FormLabel htmlFor="name" mt={4}>Longtitude</FormLabel>

@@ -56,8 +56,8 @@ export function SidebarLocation() {
             }
         }
         fetchData();
-    }, []);
-
+    }, [name, location]);
+    
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -116,6 +116,7 @@ export function SidebarLocation() {
             }
         }
     }
+    
 
     const handleChangeBranch = async (branchId) => {
         // update data user with branch id to api
@@ -136,7 +137,7 @@ export function SidebarLocation() {
             console.error(error);
         }
     }
-
+    
     const branchName = (branchId) => {
         const branch = allBranch.find(branch => branch.id === branchId);
         return branch?.name;
@@ -146,6 +147,7 @@ export function SidebarLocation() {
         const branch = allBranch.find(branch => branch.id === branchId);
         return branch?.location;
     }
+    
 
     return (
         <>

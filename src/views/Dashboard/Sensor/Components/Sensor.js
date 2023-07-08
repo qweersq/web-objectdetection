@@ -43,6 +43,7 @@ const Sensor = ({ title, captions, data, create, setCreate, remove, setRemove, e
     const [longitude, setLongitude] = useState("");
     const [status, setStatus] = useState(false);
     const [status2, setStatus2] = useState("");
+    const [code, setCode] = useState("");
 
     const dataUser = JSON.parse(localStorage.getItem("user"));
 
@@ -50,6 +51,7 @@ const Sensor = ({ title, captions, data, create, setCreate, remove, setRemove, e
         console.log(latitude, longitude, status2)
         try {
             const response = await axios.post(`${API_URL}/api/sensor`, {
+                code: code,
                 latitude: latitude,
                 longitude: longitude,
                 status: status2,
@@ -98,6 +100,8 @@ const Sensor = ({ title, captions, data, create, setCreate, remove, setRemove, e
                             <Flex justifyContent="space-between">
                                 <Flex flexDirection="column" width="100%">
                                     <FormControl>
+                                        <FormLabel htmlFor="latitude" mt={4}>sensor Code</FormLabel>
+                                        <Input id="latitude" placeholder="Sensor Code" value={code} onChange={(e) => setCode(e.target.value)} />
                                         <FormLabel htmlFor="latitude" mt={4}>Latitude</FormLabel>
                                         <Input id="latitude" placeholder="Latitude" value={latitude} onChange={(e) => setLatitude(e.target.value)} />
                                         <FormLabel htmlFor="longitude" mt={4}>Longitude</FormLabel>
@@ -139,6 +143,7 @@ const Sensor = ({ title, captions, data, create, setCreate, remove, setRemove, e
                                 <TableSensor
                                     key={row.id}
                                     id={row.id}
+                                    code={row.code}
                                     sensor={`Sensor#${row.id}`}
                                     latitude={row.latitude}
                                     longtitude={row.longitude}
