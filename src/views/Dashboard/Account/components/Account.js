@@ -47,23 +47,21 @@ const Account = ({ title, captions, data, submit, setSubmit, remove, setRemove, 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [branch_id, setBranchID] = useState("");
-  const [status, setStatus] = useState(false);
-  const [status2, setStatus2] = useState("");
+  // const [status, setStatus] = useState(false);
+  // const [status2, setStatus2] = useState("");
   const dataStorage = JSON.parse(localStorage.getItem('user'));
 
   const handleSubmit = async () => {
-    console.log(name, role, email, password, branch_id, status2)
+    console.log(name, role, email, password, branch_id)
     try {
       const { branch_id } = dataStorage;
       const response = await axios.post(`${API_URL}/api/account`, {
-        id: id,
+        // id: id,
         name: name,
         role: role,
         email: email,
         password: password,
         branch_id: parseInt(branch_id),
-        status: status2,
-        condition: "none",
       }, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -100,13 +98,13 @@ const Account = ({ title, captions, data, submit, setSubmit, remove, setRemove, 
     getRoles();
   }, []);
 
-  useEffect(() => {
-    if (status) {
-      setStatus2("active");
-    } else {
-      setStatus2("non-active");
-    }
-  }, [status])
+  // useEffect(() => {
+  //   if (status) {
+  //     setStatus2("active");
+  //   } else {
+  //     setStatus2("non-active");
+  //   }
+  // }, [status])
 
   return (
     <Card overflowX={{ sm: "scroll", xl: "hidden" }}>
@@ -139,13 +137,12 @@ const Account = ({ title, captions, data, submit, setSubmit, remove, setRemove, 
                     <Input style={inputStyle} id="email" placeholder="Enter Email" value={email} onChange={(e) => setEmail(e.target.value)} />
                     <FormLabel htmlFor="name" mt={4}>Password</FormLabel>
                     <Input style={inputStyle} id="password" placeholder="Enter name" value={password} onChange={(e) => setPassword(e.target.value)} />
-
-                    <Flex flexDirection="row" alignItems="flex-end">
+                    {/* <Flex flexDirection="row" alignItems="flex-end">
                       <Switch colorScheme="green" size="lg" mt={4} isChecked={status} onChange={(e) => setStatus(e.target.checked)} />
                       <Text fontSize="md" color={textColor} fontWeight="Bold" pl="12px">
                         Non-Active/Active
                       </Text>
-                    </Flex>
+                    </Flex> */}
                     <Button bg="green.400" color="white" borderRadius="lg" w="847px" mt={4} onClick={() => handleSubmit()}>
                       Create
                     </Button>

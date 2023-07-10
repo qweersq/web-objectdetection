@@ -33,7 +33,7 @@ function Tables() {
     <Flex direction='column' pt={{ base: "120px", md: "75px" }}>
       <Account
         title={"Account"}
-        captions={["Name", "Email", "Role", "Status", "Action"]}
+        captions={["Name", "Email", "Role", "Action"]}
         data={accountData} 
         submit={submit}
         setSubmit={setSubmit}

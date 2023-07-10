@@ -20,7 +20,9 @@ import {
     FormHelperText,
     Input,
     Switch,
+    Select,
 } from "@chakra-ui/react";
+
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
@@ -41,8 +43,9 @@ function TableAccount(props) {
     const [editedEmail, setEditedEmail] = useState(email);
     const [editedPassword, setEditedPassword] = useState(password);
     const [editedBranchID, setEditedBranchID] = useState(branch_id);
-    const [editedStatus, setEditedStatus] = useState(status);
-    const [editedStatus2, setEditedStatus2] = useState(status2);
+    const dataStorage = JSON.parse(localStorage.getItem('user'));
+    // const [editedStatus, setEditedStatus] = useState(status);
+    // const [editedStatus2, setEditedStatus2] = useState(status2);
 
     const handleEdit = async () => {
         try {
@@ -52,7 +55,7 @@ function TableAccount(props) {
                 email: editedEmail,
                 password: editedPassword,
                 branch_id: editedBranchID,
-                status: editedStatus2,
+                // status: editedStatus2,
             }, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -67,13 +70,20 @@ function TableAccount(props) {
         }
     };
 
-    useEffect(() => {
-        if (editedStatus) {
-            setEditedStatus2("active");
-        } else {
-            setEditedStatus2("non-active");
-        }
-    }, [editedStatus])
+    const optionRole = [
+        { value: "superadmin", label: "Super Admin" },
+        { value: "admin", label: "Admin" },
+        { value: "security", label: "Security" },
+      ]
+
+
+    // useEffect(() => {
+    //     if (editedStatus) {
+    //         setEditedStatus2("active");
+    //     } else {
+    //         setEditedStatus2("non-active");
+    //     }
+    // }, [editedStatus])
 
     const handleDelete = async () => {
         console.log(props.id);
@@ -126,7 +136,7 @@ function TableAccount(props) {
                     </Badge>
                 </Td>
 
-                <Td>
+                {/* <Td>
                     <Badge
                         bg={status === "active" ? "green.400" : "red.400"}
                         color="white"
@@ -136,7 +146,7 @@ function TableAccount(props) {
                     >
                         {status}
                     </Badge>
-                </Td>
+                </Td> */}
                 <Td>
                     <Flex justifyContent="space-between" maxWidth="140px">
                         <Button onClick={onOpen} bg="white" color="black" width="65px" height="32px" borderRadius="lg" borderColor="black" border="1px" >
@@ -161,18 +171,22 @@ function TableAccount(props) {
                                     <FormLabel htmlFor="name">Name</FormLabel>
                                     <Input style={inputStyle} id="name" placeholder="Enter name" value={editedName} onChange={(e) => setEditedName(e.target.value)} />
                                     <FormLabel htmlFor="name" mt={4}>Role</FormLabel>
-                                    <Input style={inputStyle} id="role" placeholder="Enter Role" value={editedRole} onChange={(e) => setEditedRole(e.target.value)} />
+                                    <Select style={inputStyle} id="role" value={editedRole} onChange={(e) => setEditedRole(e.target.value)}>
+                                        {optionRole.map((role) => (
+                                            <option key={role.value} value={role.value}>{role.label}</option>
+                                        ))}
+                                    </Select>
                                     <FormLabel htmlFor="name" mt={4}>Email</FormLabel>
                                     <Input style={inputStyle} id="email" placeholder="Enter Email" value={editedEmail} onChange={(e) => setEditedEmail(e.target.value)} />
                                     {/* <FormLabel htmlFor="name" mt={4}>Password</FormLabel>
                                     <Input style={inputStyle} id="password" placeholder="Enter name" value={editedPassword} onChange={(e) => setEditedPassword(e.target.value)} /> */}
 
-                                    <Flex flexDirection="row" alignItems="flex-end">
+                                    {/* <Flex flexDirection="row" alignItems="flex-end">
                                         <Switch colorScheme="green" size="lg" mt={4} isChecked={editedStatus} onChange={(e) => setEditedStatus(e.target.checked)} />
                                         <Text fontSize="md" color={textColor} fontWeight="Bold" pl="12px">
                                             Non-Active/Active
                                         </Text>
-                                    </Flex>
+                                    </Flex> */}
                                     <Button bg="green.400" color="white" borderRadius="lg" w="847px" mt={4} onClick={() => handleEdit(id)}>
                                         Edit
                                     </Button>

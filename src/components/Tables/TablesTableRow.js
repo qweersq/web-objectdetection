@@ -67,7 +67,7 @@ function TablesTableRow(props) {
               {user.role}
             </Badge>
           </Td>
-          <Td>
+          {/* <Td>
             <Badge
               bg={user.status === "active" ? "green.400" : "red.400"}
               color="white"
@@ -77,7 +77,7 @@ function TablesTableRow(props) {
             >
               {user.status}
             </Badge>
-          </Td>
+          </Td> */}
         </Tr>
       ))}
     </Tbody>

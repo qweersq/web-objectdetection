@@ -62,7 +62,7 @@ function TablesHistory() {
               fontWeight="bold"
               minWidth="100%"
             >
-              {history.name}
+              {history.sensor_id}
             </Text>
           </Td>
           <Td>
@@ -77,13 +77,13 @@ function TablesHistory() {
           </Td>
           <Td>
             <Badge
-              bg={history.status === "aman" ? "green.400" : "red.500"}
+              bg={history.isEmergency === "aman" ? "green.400" : "red.500"}
               color="white"
               fontSize="16px"
               p="3px 10px"
               borderRadius="8px"
             >
-              {history.status}
+              {history.isEmergency}
             </Badge>
           </Td>
           <Td>
