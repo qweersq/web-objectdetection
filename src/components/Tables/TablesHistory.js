@@ -49,6 +49,8 @@ function TablesHistory() {
     }
   };
 
+  console.log("history data",historyData);
+
   return (
     <Tbody>
       {historyData.map((history) => (

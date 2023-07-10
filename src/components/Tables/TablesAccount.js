@@ -164,15 +164,13 @@ function TableAccount(props) {
                                     <Input style={inputStyle} id="role" placeholder="Enter Role" value={editedRole} onChange={(e) => setEditedRole(e.target.value)} />
                                     <FormLabel htmlFor="name" mt={4}>Email</FormLabel>
                                     <Input style={inputStyle} id="email" placeholder="Enter Email" value={editedEmail} onChange={(e) => setEditedEmail(e.target.value)} />
-                                    <FormLabel htmlFor="name" mt={4}>Password</FormLabel>
-                                    <Input style={inputStyle} id="password" placeholder="Enter name" value={editedPassword} onChange={(e) => setEditedPassword(e.target.value)} />
-                                    <FormLabel htmlFor="name" mt={4}>Binus</FormLabel>
-                                    <Input style={inputStyle} id="name" placeholder="Enter name" value={editedBranchID} onChange={(e) => setEditedBranchID(e.target.value)} />
+                                    {/* <FormLabel htmlFor="name" mt={4}>Password</FormLabel>
+                                    <Input style={inputStyle} id="password" placeholder="Enter name" value={editedPassword} onChange={(e) => setEditedPassword(e.target.value)} /> */}
 
                                     <Flex flexDirection="row" alignItems="flex-end">
                                         <Switch colorScheme="green" size="lg" mt={4} isChecked={editedStatus} onChange={(e) => setEditedStatus(e.target.checked)} />
                                         <Text fontSize="md" color={textColor} fontWeight="Bold" pl="12px">
-                                            Status
+                                            Non-Active/Active
                                         </Text>
                                     </Flex>
                                     <Button bg="green.400" color="white" borderRadius="lg" w="847px" mt={4} onClick={() => handleEdit(id)}>

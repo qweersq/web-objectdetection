@@ -49,10 +49,12 @@ const Account = ({ title, captions, data, submit, setSubmit, remove, setRemove, 
   const [branch_id, setBranchID] = useState("");
   const [status, setStatus] = useState(false);
   const [status2, setStatus2] = useState("");
+  const dataStorage = JSON.parse(localStorage.getItem('user'));
 
   const handleSubmit = async () => {
     console.log(name, role, email, password, branch_id, status2)
     try {
+      const { branch_id } = dataStorage;
       const response = await axios.post(`${API_URL}/api/account`, {
         id: id,
         name: name,
@@ -73,6 +75,12 @@ const Account = ({ title, captions, data, submit, setSubmit, remove, setRemove, 
       console.error(error);
     }
   };
+
+  const optionRole = [
+    { value: "superadmin", label: "Super Admin" },
+    { value: "admin", label: "Admin" },
+    { value: "security", label: "Security" },
+  ]
 
   //mengambil role dari api account 
   useEffect(() => {
@@ -123,21 +131,19 @@ const Account = ({ title, captions, data, submit, setSubmit, remove, setRemove, 
                     <FormLabel htmlFor="name" mt={4}>Role</FormLabel>
                     {/* <Input style={inputStyle} id="role" placeholder="Enter Role" value={role} onChange={(e) => setRole(e.target.value)} /> */}
                     <Select style={inputStyle} id="role" value={role} onChange={(e) => setRole(e.target.value)}>
-                      {roles.map((role) => (
-                        <option key={role.id} value={role.role}>{role.role}</option>
+                      {optionRole.map((role) => (
+                        <option key={role.value} value={role.value}>{role.label}</option>
                       ))}
                     </Select>
                     <FormLabel htmlFor="name" mt={4}>Email</FormLabel>
                     <Input style={inputStyle} id="email" placeholder="Enter Email" value={email} onChange={(e) => setEmail(e.target.value)} />
                     <FormLabel htmlFor="name" mt={4}>Password</FormLabel>
                     <Input style={inputStyle} id="password" placeholder="Enter name" value={password} onChange={(e) => setPassword(e.target.value)} />
-                    <FormLabel htmlFor="name" mt={4}>Binus</FormLabel>
-                    <Input style={inputStyle} id="name" placeholder="Enter name" value={branch_id} onChange={(e) => setBranchID(e.target.value)} />
 
                     <Flex flexDirection="row" alignItems="flex-end">
                       <Switch colorScheme="green" size="lg" mt={4} isChecked={status} onChange={(e) => setStatus(e.target.checked)} />
                       <Text fontSize="md" color={textColor} fontWeight="Bold" pl="12px">
-                        Status
+                        Non-Active/Active
                       </Text>
                     </Flex>
                     <Button bg="green.400" color="white" borderRadius="lg" w="847px" mt={4} onClick={() => handleSubmit()}>
