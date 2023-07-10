@@ -44,21 +44,20 @@ const Sensor = ({ title, captions, data, create, setCreate, remove, setRemove, e
     const [status, setStatus] = useState(false);
     const [status2, setStatus2] = useState("");
     const [code, setCode] = useState("");
+    const [isOn, setIsOn] = useState(false);
+    const [isOn2, setIsOn2] = useState("");
 
     const dataUser = JSON.parse(localStorage.getItem("user"));
 
     const handleCreate = async () => {
-        console.log(latitude, longitude, status2)
+        console.log(latitude, longitude, isOn2)
         try {
             const response = await axios.post(`${API_URL}/api/sensor`, {
                 code: code,
                 latitude: latitude,
                 longitude: longitude,
-                status: status2,
+                isOn: isOn,
                 branch_id: dataUser.branch_id,
-                from_time: "00:00",
-                to_time: "00:00",
-                conditional: "non-active",
             }, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -66,20 +65,18 @@ const Sensor = ({ title, captions, data, create, setCreate, remove, setRemove, e
             });
             setCreate(!create);
             onClose();
-            console.log(response);
-            onClose();
         } catch (error) {
             console.log(error);
         }
     };
 
     useEffect(() => {
-        if (status) {
-            setStatus2("active");
+        if (isOn) {
+            setIsOn2("true");
         } else {
-            setStatus2("non-active");
+            setIsOn2("false");
         }
-    }, [status])
+    }, [isOn])
 
 
     return (
@@ -107,7 +104,7 @@ const Sensor = ({ title, captions, data, create, setCreate, remove, setRemove, e
                                         <FormLabel htmlFor="longitude" mt={4}>Longitude</FormLabel>
                                         <Input id="longitude" placeholder="Longitude" value={longitude} onChange={(e) => setLongitude(e.target.value)} />
                                         <Flex flexDirection="row" alignItems="flex-end">
-                                            <Switch colorScheme="green" size="lg" mt={4} isChecked={status} onChange={(e) => setStatus(e.target.checked)} />
+                                            <Switch colorScheme="green" size="lg" mt={4} isChecked={isOn} onChange={(e) => setIsOn(e.target.checked)} />
                                             <Text fontSize="md" color={textColor} fontWeight="Bold" pl="12px" >
                                                 Status
                                             </Text>
@@ -144,10 +141,10 @@ const Sensor = ({ title, captions, data, create, setCreate, remove, setRemove, e
                                     key={row.id}
                                     id={row.id}
                                     code={row.code}
-                                    sensor={`Sensor#${row.id}`}
+                                    sensor={row.id}
                                     latitude={row.latitude}
                                     longtitude={row.longitude}
-                                    status={row.status}
+                                    isOn={row.isOn}
                                     remove={remove}
                                     setRemove={setRemove}
                                     edited={edited}

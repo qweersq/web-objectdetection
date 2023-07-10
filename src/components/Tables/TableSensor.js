@@ -28,7 +28,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 function TableSensor(props) {
-    const { id, code, sensor, latitude, longtitude, status, remove, setRemove, edited, setEdited, status2 } = props;
+    const { id, code, sensor, latitude, longtitude, status, remove, setRemove, edited, setEdited, status2, isOn, isOn2 } = props;
     const textColor = useColorModeValue("gray.700", "white");
     const inputStyle = { border: "1px solid #000", borderRadius: "10px" };
     const bgStatus = useColorModeValue("gray.400", "#1a202c");
@@ -40,6 +40,8 @@ function TableSensor(props) {
     const [editedStatus, setEditedStatus] = useState(status);
     const [editedStatus2, setEditedStatus2] = useState(status2)
     const [editedCode, setEditedCode] = useState(code);
+    const [editedIsOn, setEditedIsOn] = useState(isOn);
+    const [editedIsOn2, setEditedIsOn2] = useState(isOn2);
 
     const handleEdit = async () => {
         try {
@@ -49,7 +51,7 @@ function TableSensor(props) {
                     code: editedCode,
                     longitude: editedLongtitude,
                     latitude: editedLatitude,
-                    status: editedStatus2, // Menggunakan editedStatus2 bukan editedStatus
+                    isOn: editedIsOn2, // Menggunakan editedStatus2 bukan editedStatus
                 },
                 {
                     headers: {
@@ -67,12 +69,12 @@ function TableSensor(props) {
 
 
     useEffect(() => {
-        if (editedStatus) {
-            setEditedStatus2("active");
+        if (editedIsOn) {
+            setEditedIsOn2("true");
         } else {
-            setEditedStatus2("non-active");
+            setEditedIsOn2("false");
         }
-    }, [editedStatus])
+    }, [editedIsOn])
 
     const handleDelete = async () => {
         const confirmation = window.confirm("Are you sure you want to delete this sensor?");
@@ -122,13 +124,13 @@ function TableSensor(props) {
 
                 <Td>
                     <Badge
-                        bg={status === "active" ? "green.400" : "red.400"}
+                        bg={isOn === true ? "green.400" : "red.400"}
                         color="white"
                         fontSize="16px"
                         p="3px 10px"
                         borderRadius="8px"
                     >
-                        {status}
+                        {isOn ? "On" : "Off"}
                     </Badge>
                 </Td>
                 <Td>
@@ -156,7 +158,7 @@ function TableSensor(props) {
                                             <FormLabel htmlFor="name" mt={4}>Longtitude</FormLabel>
                                             <Input style={inputStyle} id="longtitude" placeholder="Longtitude" value={editedLongtitude} onChange={(e) => setEditedLongtitude(e.target.value)} />
                                             <Flex flexDirection="row" alignItems="flex-end">
-                                                <Switch isChecked={editedStatus} onChange={(e) => setEditedStatus(e.target.checked)} colorScheme="green" size="lg" mt={4} />
+                                                <Switch isChecked={editedIsOn} onChange={(e) => setEditedIsOn(e.target.checked)} colorScheme="green" size="lg" mt={4} />
                                                 <Text fontSize="md" color={textColor} fontWeight="Bold" pl="12px">
                                                     Status
                                                 </Text>

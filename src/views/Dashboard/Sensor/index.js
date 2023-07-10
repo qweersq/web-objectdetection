@@ -33,7 +33,7 @@ function Tables() {
     <Flex direction='column' pt={{ base: "120px", md: "75px" }}>
       <Sensor
         title={"Sensor"}
-        captions={["Sensor ID","Code", "Latitude", "Longtitude", "Status", "Action"]}
+        captions={["ID","Sensor Code", "Latitude", "Longtitude", "Status", "Action"]}
         data={sensorData} 
         create={create}
         setCreate={setCreate}

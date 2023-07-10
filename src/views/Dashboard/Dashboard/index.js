@@ -56,14 +56,15 @@ export default function Dashboard() {
   const [toTime, setToTime] = useState(null);
 
   const handleSave = async () => {
+    console.log(fromTime, toTime);
     try {
       // Menggunakan Moment.js untuk memformat nilai waktu menjadi jam dan menit
-      const formattedFromTime = moment(fromTime).format('HH:mm');
-      const formattedToTime = moment(toTime).format('HH:mm');
-  
-      const response = await axios.put(`${API_URL}/api/times-sensor`, {
-        from_time: formattedFromTime,
-        to_time: formattedToTime,
+      // const formattedFromTime = moment(fromTime).format('HH:mm');
+      // const formattedToTime = moment(toTime).format('HH:mm');
+      // console.log(formattedFromTime, formattedToTime);
+      const response = await axios.put(`${API_URL}/api/branch/${id}`, {
+        from_active_time: fromTime,
+        to_active_time: toTime,
       },
       {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
@@ -108,6 +109,15 @@ export default function Dashboard() {
   };
   const sensorCount = sensorData.length;
 
+  const onChangeFromTime = (time, timeString) => {
+    console.log(time, timeString);
+    setFromTime(timeString);
+  };
+
+  const onChangeToTime = (time, timeString) => {
+    console.log(time, timeString);
+    setToTime(timeString);
+  };
 
   return (
     <>
@@ -120,18 +130,19 @@ export default function Dashboard() {
                 format="HH:mm"
                 style={pickerStyle}
                 className="custom-time-picker"
-                value={fromTime}
-                onChange={(time) => setFromTime(time)}
+                // value={fromTime}
+                onChange={(time, timeString) => onChangeFromTime(time, timeString)}
               />
               <Divider width="10px" borderWidth="2px" borderColor={textColor} borderRadius="3px" pl="3px" />
               <TimePicker
                 format="HH:mm"
                 style={pickerStyle}
                 className="custom-time-picker"
-                value={toTime}
-                onChange={(time) => setToTime(time)}
+                // value={toTime}
+                onChange={(time, timeString) => onChangeToTime(time, timeString)}
               />
-              <Button
+            </Flex>
+            <Button
                 bg={buttonBg}
                 _hover={{ bg: isOn ? '#42ffaf' : '#FF7875' }}
                 color="white"
@@ -142,18 +153,6 @@ export default function Dashboard() {
               >
                 Save
               </Button>
-            </Flex>
-            <Button
-              bg={buttonBg}
-              _hover={{ bg: isOn ? '#42ffaf' : '#FF7875' }}
-              color="white"
-              borderRadius="lg"
-              onClick={toggleButton}
-              width="77px"
-              height="29px"
-            >
-              {isOn ? 'On' : 'Off'}
-            </Button>
           </Flex>
         </Card>
         <Card p={4} color="black" borderRadius="lg" boxShadow="md" justifyContent="center" width="100%">

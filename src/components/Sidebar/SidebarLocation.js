@@ -56,12 +56,12 @@ export function SidebarLocation() {
             }
         }
         fetchData();
-    }, [name, location]);
+    }, [userDataStorage.branch_id]);
     
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await axios.post(`${API_URL}/api/branch`, { name: name, location: location }, {
+            await axios.post(`${API_URL}/api/branch`, { name: name, city: location }, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
