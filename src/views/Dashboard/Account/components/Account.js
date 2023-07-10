@@ -21,6 +21,7 @@ import {
   ModalBody,
   ModalCloseButton,
   Switch,
+  Select,
 } from "@chakra-ui/react";
 // Custom components
 import Card from "components/Card/Card.js";
@@ -42,6 +43,7 @@ const Account = ({ title, captions, data, submit, setSubmit, remove, setRemove, 
   const [id, setID] = useState("");
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
+  const [roles, setRoles] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [branch_id, setBranchID] = useState("");
@@ -71,11 +73,29 @@ const Account = ({ title, captions, data, submit, setSubmit, remove, setRemove, 
       console.error(error);
     }
   };
-  
+
+  //mengambil role dari api account 
   useEffect(() => {
-    if(status) {
+    const getRoles = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/api/account`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+        setRoles(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    console.log(roles)
+    getRoles();
+  }, []);
+
+  useEffect(() => {
+    if (status) {
       setStatus2("active");
-    } else { 
+    } else {
       setStatus2("non-active");
     }
   }, [status])
@@ -101,21 +121,26 @@ const Account = ({ title, captions, data, submit, setSubmit, remove, setRemove, 
                     <FormLabel htmlFor="name">Name</FormLabel>
                     <Input style={inputStyle} id="name" placeholder="Enter name" value={name} onChange={(e) => setName(e.target.value)} />
                     <FormLabel htmlFor="name" mt={4}>Role</FormLabel>
-                    <Input style={inputStyle} id="role" placeholder="Enter Role" value={role} onChange={(e) => setRole(e.target.value)} />
+                    {/* <Input style={inputStyle} id="role" placeholder="Enter Role" value={role} onChange={(e) => setRole(e.target.value)} /> */}
+                    <Select style={inputStyle} id="role" value={role} onChange={(e) => setRole(e.target.value)}>
+                      {roles.map((role) => (
+                        <option key={role.id} value={role.role}>{role.role}</option>
+                      ))}
+                    </Select>
                     <FormLabel htmlFor="name" mt={4}>Email</FormLabel>
                     <Input style={inputStyle} id="email" placeholder="Enter Email" value={email} onChange={(e) => setEmail(e.target.value)} />
                     <FormLabel htmlFor="name" mt={4}>Password</FormLabel>
                     <Input style={inputStyle} id="password" placeholder="Enter name" value={password} onChange={(e) => setPassword(e.target.value)} />
                     <FormLabel htmlFor="name" mt={4}>Binus</FormLabel>
-                    <Input style={inputStyle} id="name" placeholder="Enter name" value={branch_id} onChange={(e) => setBranchID(e.target.value)}/>
+                    <Input style={inputStyle} id="name" placeholder="Enter name" value={branch_id} onChange={(e) => setBranchID(e.target.value)} />
 
                     <Flex flexDirection="row" alignItems="flex-end">
-                      <Switch colorScheme="green" size="lg" mt={4} isChecked={status} onChange={(e) => setStatus(e.target.checked)}/>
+                      <Switch colorScheme="green" size="lg" mt={4} isChecked={status} onChange={(e) => setStatus(e.target.checked)} />
                       <Text fontSize="md" color={textColor} fontWeight="Bold" pl="12px">
                         Status
                       </Text>
                     </Flex>
-                    <Button bg="green.400" color="white" borderRadius="lg" w="847px" mt={4}  onClick={() => handleSubmit()}>
+                    <Button bg="green.400" color="white" borderRadius="lg" w="847px" mt={4} onClick={() => handleSubmit()}>
                       Create
                     </Button>
                   </FormControl>
