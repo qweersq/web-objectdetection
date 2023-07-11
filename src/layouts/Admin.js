@@ -5,7 +5,7 @@ import Footer from "components/Footer/Footer.js";
 // Layout components
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import Sidebar from "components/Sidebar";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import routes from "routes.js";
 import "@fontsource/roboto/400.css";
@@ -21,6 +21,8 @@ import PanelContent from "../components/Layout/PanelContent";
 import SignIn from "views/Auth/SignIn";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import axios, { all, HttpStatusCode } from "axios";
+import { API_URL } from "constant/data";
 
 
 export default function Dashboard(props) {
@@ -28,6 +30,8 @@ export default function Dashboard(props) {
   // states and functions
   const [sidebarVariant, setSidebarVariant] = useState("transparent");
   const [fixed, setFixed] = useState(false);
+  const [userDataStorage, setUserDataStorage] = useState(JSON.parse(localStorage.getItem('user')));
+
   // functions for changing the states from components
   const getRoute = () => {
     return window.location.pathname !== "/admin/full-screen-maps";
@@ -94,6 +98,7 @@ export default function Dashboard(props) {
 
   // validate token to access dashboard and redirect to login if not authenticated
   const PrivateRoute = ({ component: Component, ...rest }) => (
+    fetchData(),
     isAuthenticated ? (
       getRoutes(routes)
     ) : (
@@ -102,6 +107,28 @@ export default function Dashboard(props) {
     )
   );
 
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/api/accounts/token`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      }).then((response) => {
+        console.log("TEST", response);
+      });
+    } catch (error) {
+      console.log("ERORR ", error.response.status);
+      if(error.response.status === 401) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        window.location.href = "/login";
+      }
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   document.documentElement.dir = "ltr";
