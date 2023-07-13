@@ -67,7 +67,7 @@ function TablesHistory() {
           </Td>
           <Td>
             <Text fontSize="md" color={textColor} fontWeight="light" pb=".5rem">
-              {history.user_id}
+              {history.user.name}
             </Text>
           </Td>
           <Td>

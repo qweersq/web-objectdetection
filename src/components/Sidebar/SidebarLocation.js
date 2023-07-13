@@ -37,7 +37,13 @@ export function SidebarLocation() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { isOpen: isOpen2, onOpen: onOpen2, onClose: onClose2 } = useDisclosure();
     const [userDataStorage, setUserDataStorage] = useState(JSON.parse(localStorage.getItem('user')));
-    const [allBranch, setAllBranch] = useState([]);
+    const [allBranch, setAllBranch] = useState([
+        {
+            id: 0,
+            name: "",
+            location: ""
+        },
+    ]);
     const [currentBranch, setCurrentBranch] = useState({});
     const [name, setName] = useState('');
     const [location, setLocation] = useState('');
@@ -110,6 +116,7 @@ export function SidebarLocation() {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
                 });
+                console.log("RESPONSE BRANCH", response.data)
                 setAllBranch(response.data);
             } catch (error) {
                 console.error(error);
@@ -174,7 +181,7 @@ export function SidebarLocation() {
                             <ModalCloseButton />
                             <ModalBody>
                                 <Grid templateColumns="repeat(3, 1fr)" gap={6}>
-                                    {allBranch?.map((branch) => (
+                                    {allBranch.map((branch) => (
                                         <Card p="1rem" my={{ sm: "24px", xl: "0px" }} border='1px' borderColor='gray.200' boxShadow="md">
                                             <CardHeader p="12px 5px" mb="12px">
                                                 <Flex justify="space-between" align="center" flexDirection="column" minHeight="30px" w="100%">
